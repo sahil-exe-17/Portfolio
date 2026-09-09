@@ -313,10 +313,15 @@ class Media {
       font: this.font
     });
   }
-  update(scroll, direction) {
-    this.plane.position.x = this.x - scroll.current - this.extra;
+  update(scroll) {
+    const halfTotal = this.widthTotal / 2;
+    // Continuous mathematical modulo wrapping around center
+    let x = ((this.x - scroll.current) % this.widthTotal + this.widthTotal) % this.widthTotal;
+    if (x > halfTotal) {
+      x -= this.widthTotal;
+    }
+    this.plane.position.x = x;
 
-    const x = this.plane.position.x;
     const H = this.viewport.width / 2;
 
     if (this.bend === 0) {
@@ -327,32 +332,19 @@ class Media {
       const R = (H * H + B_abs * B_abs) / (2 * B_abs);
       const effectiveX = Math.min(Math.abs(x), H);
 
-      const arc = R - Math.sqrt(R * R - effectiveX * effectiveX);
+      const arc = R - Math.sqrt(Math.max(0, R * R - effectiveX * effectiveX));
       if (this.bend > 0) {
         this.plane.position.y = -arc;
-        this.plane.rotation.z = -Math.sign(x) * Math.asin(effectiveX / R);
+        this.plane.rotation.z = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
       } else {
         this.plane.position.y = arc;
-        this.plane.rotation.z = Math.sign(x) * Math.asin(effectiveX / R);
+        this.plane.rotation.z = Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
       }
     }
 
     this.speed = scroll.current - scroll.last;
     this.program.uniforms.uTime.value += 0.04;
     this.program.uniforms.uSpeed.value = this.speed;
-
-    const planeOffset = this.plane.scale.x / 2;
-    const viewportOffset = this.viewport.width / 2;
-    this.isBefore = this.plane.position.x + planeOffset < -viewportOffset;
-    this.isAfter = this.plane.position.x - planeOffset > viewportOffset;
-    if (direction === 'right' && this.isBefore) {
-      this.extra -= this.widthTotal;
-      this.isBefore = this.isAfter = false;
-    }
-    if (direction === 'left' && this.isAfter) {
-      this.extra += this.widthTotal;
-      this.isBefore = this.isAfter = false;
-    }
   }
   onResize({ screen, viewport } = {}) {
     if (screen) this.screen = screen;
@@ -366,10 +358,14 @@ class Media {
     this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
     this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
-    this.padding = 2;
+    this.padding = 1.5;
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
+    if (this.title && this.title.mesh) {
+      const textHeight = this.plane.scale.y * 0.12;
+      this.title.mesh.position.y = -this.plane.scale.y * 0.5 - textHeight * 0.5 - 0.1;
+    }
   }
 }
 
@@ -449,7 +445,7 @@ class App {
     ];
     const galleryItems = items && items.length ? items : defaultItems;
     this.rawItems = galleryItems;
-    this.mediasImages = galleryItems.concat(galleryItems);
+    this.mediasImages = galleryItems;
     this.medias = this.mediasImages.map((data, index) => {
       return new Media({
         geometry: this.planeGeometry,
@@ -606,9 +602,8 @@ class App {
   onCheck() {
     if (!this.medias || !this.medias[0]) return;
     const width = this.medias[0].width;
-    const itemIndex = Math.round(Math.abs(this.scroll.target) / width);
-    const item = width * itemIndex;
-    this.scroll.target = this.scroll.target < 0 ? -item : item;
+    const itemIndex = Math.round(this.scroll.target / width);
+    this.scroll.target = width * itemIndex;
   }
   onResize() {
     if (!this.container) return;
@@ -634,9 +629,8 @@ class App {
       return;
     }
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
-    const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
     if (this.medias) {
-      this.medias.forEach(media => media.update(this.scroll, direction));
+      this.medias.forEach(media => media.update(this.scroll));
 
       // Active project tracking
       let closestMedia = null;
