@@ -5,23 +5,6 @@ import { FaGithub as Github } from 'react-icons/fa';
 import CircularGallery from './CircularGallery';
 import ElectricBorder from './ElectricBorder';
 
-const GALLERY_ITEMS = [
-  { image: "/projects/stackflow-ai.png", text: "StackFlow AI", id: "stackflow-ai" },
-  { image: "/projects/cryptopulse-ai.png", text: "CryptoPulse AI", id: "cryptopulse-ai" },
-  { image: "/projects/treenova.svg", text: "TreeNova BST", id: "treenova" },
-  { image: "/projects/matchmind-ai.svg", text: "MatchMind AI", id: "matchmind-ai" },
-  { image: "/projects/stock-sense-ai.svg", text: "Stock Sense AI", id: "stock-sense-ai" },
-  { image: "/projects/ascendia-ai.svg", text: "Ascendia AI", id: "ascendia-ai" },
-  { image: "/projects/culina-ai.svg", text: "Culina AI", id: "culina-ai" },
-  { image: "/projects/travix-ai.svg", text: "Travix AI", id: "travix-ai" },
-  { image: "/projects/spectra-ai.svg", text: "Spectra AI", id: "spectra-ai" },
-  { image: "/projects/ml-classifier.svg", text: "ML Classifier", id: "ml-classifier" },
-  { image: "/projects/earniq.svg", text: "EarnIQ", id: "earniq" },
-  { image: "/projects/pune-traffic.png", text: "Pune Traffic", id: "pune-traffic" },
-  { image: "/projects/zentrix.png", text: "ZentriX App", id: "zentrix" },
-  { image: "/projects/intelaris.png", text: "Intelaris", id: "intelaris" },
-  { image: "/projects/yt-predictor.svg", text: "YT Predictor", id: "yt-predictor" },
-];
 
 const ALL_PROJECTS = [
   {
@@ -295,6 +278,19 @@ const ALL_PROJECTS = [
     }
   }
 ];
+
+const GALLERY_ITEMS = ALL_PROJECTS.map((p, idx) => ({
+  id: p.id,
+  text: p.title,
+  title: p.title,
+  number: p.number,
+  category: p.category,
+  domain: p.domain,
+  tech: p.tech,
+  metrics: p.metrics,
+  liveUrl: p.liveUrl,
+  image: `/projects/${p.id}.png`,
+}));
 
 export default function Projects() {
   const galleryRef = useRef(null);

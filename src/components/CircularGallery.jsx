@@ -183,6 +183,223 @@ class Title {
   }
 }
 
+function drawRoundRectFallback(ctx, x, y, width, height, radius) {
+  if (typeof ctx.roundRect === 'function') {
+    ctx.roundRect(x, y, width, height, radius);
+  } else {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+  }
+}
+
+function createProjectCardCanvas(itemData, index) {
+  const canvas = document.createElement('canvas');
+  const w = 800;
+  const h = 1040;
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext('2d');
+
+  const title = (itemData?.text || itemData?.title || 'PROJECT').trim();
+  const number = itemData?.number || ('0' + (index + 1)).slice(-2);
+  const category = (itemData?.category || 'AI INTELLIGENCE ENGINE').toUpperCase();
+  const tech = itemData?.tech || ['React 19', 'Next.js', 'FastAPI', 'Tailwind CSS'];
+  const metrics = itemData?.metrics || 'Production Deployed // High-Speed Inference';
+
+  // Aurora Cyber Themes matching portfolio aesthetics
+  const themes = [
+    { primary: '#7cff67', secondary: '#38bdf8', glow: 'rgba(124, 255, 103, 0.18)', tagBg: 'rgba(124, 255, 103, 0.12)' },
+    { primary: '#B497CF', secondary: '#c084fc', glow: 'rgba(180, 151, 207, 0.22)', tagBg: 'rgba(180, 151, 207, 0.12)' },
+    { primary: '#5227FF', secondary: '#818cf8', glow: 'rgba(82, 39, 255, 0.22)', tagBg: 'rgba(82, 39, 255, 0.15)' },
+    { primary: '#38bdf8', secondary: '#7cff67', glow: 'rgba(56, 189, 248, 0.18)', tagBg: 'rgba(56, 189, 248, 0.12)' },
+    { primary: '#f43f5e', secondary: '#B497CF', glow: 'rgba(244, 63, 94, 0.18)', tagBg: 'rgba(244, 63, 94, 0.12)' },
+  ];
+  const theme = themes[index % themes.length];
+
+  // 1. Deep Obsidian Card Base Gradient
+  const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+  bgGrad.addColorStop(0, '#10121d');
+  bgGrad.addColorStop(0.4, '#090a10');
+  bgGrad.addColorStop(1, '#040407');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, w, h);
+
+  // 2. Ambient Aurora Core Glow
+  const radial = ctx.createRadialGradient(w / 2, h * 0.38, 30, w / 2, h * 0.38, 440);
+  radial.addColorStop(0, theme.glow);
+  radial.addColorStop(0.6, 'rgba(10, 11, 18, 0.05)');
+  radial.addColorStop(1, 'transparent');
+  ctx.fillStyle = radial;
+  ctx.fillRect(0, 0, w, h);
+
+  // 3. Subtle Cyber Matrix Grid
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+  ctx.lineWidth = 1;
+  const step = 44;
+  for (let x = step; x < w; x += step) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, h);
+    ctx.stroke();
+  }
+  for (let y = step; y < h; y += step) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(w, y);
+    ctx.stroke();
+  }
+
+  // 4. Outer Glass Perimeter & Corner Brackets
+  const pad = 40;
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  drawRoundRectFallback(ctx, pad, pad, w - pad * 2, h - pad * 2, 28);
+  ctx.stroke();
+
+  // High-Tech Corner Accents
+  ctx.strokeStyle = theme.primary;
+  ctx.lineWidth = 4;
+  const cLen = 32;
+  // Top-left
+  ctx.beginPath();
+  ctx.moveTo(pad - 2, pad + cLen);
+  ctx.lineTo(pad - 2, pad - 2);
+  ctx.lineTo(pad + cLen, pad - 2);
+  ctx.stroke();
+  // Top-right
+  ctx.beginPath();
+  ctx.moveTo(w - pad + 2 - cLen, pad - 2);
+  ctx.lineTo(w - pad + 2, pad - 2);
+  ctx.lineTo(w - pad + 2, pad + cLen);
+  ctx.stroke();
+  // Bottom-left
+  ctx.beginPath();
+  ctx.moveTo(pad - 2, h - pad - cLen);
+  ctx.lineTo(pad - 2, h - pad + 2);
+  ctx.lineTo(pad + cLen, h - pad + 2);
+  ctx.stroke();
+  // Bottom-right
+  ctx.beginPath();
+  ctx.moveTo(w - pad + 2 - cLen, h - pad + 2);
+  ctx.lineTo(w - pad + 2, h - pad + 2);
+  ctx.lineTo(w - pad + 2, h - pad - cLen);
+  ctx.stroke();
+
+  // 5. Header: Project Code & Status Indicator
+  ctx.font = '700 20px "Space Mono", monospace, monospace';
+  ctx.fillStyle = theme.primary;
+  ctx.textAlign = 'left';
+  ctx.fillText(`// PROJ_${number}`, pad + 32, pad + 60);
+
+  // Live Pulse Dot & Text
+  ctx.fillStyle = theme.primary;
+  ctx.beginPath();
+  ctx.arc(w - pad - 165, pad + 54, 5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.font = '600 15px monospace, sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+  ctx.fillText('LIVE ENGINE', w - pad - 148, pad + 60);
+
+  // 6. Category Pill Badge
+  ctx.font = '700 14px monospace, sans-serif';
+  const catWidth = ctx.measureText(category).width + 36;
+  const badgeX = pad + 32;
+  const badgeY = pad + 110;
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  drawRoundRectFallback(ctx, badgeX, badgeY, catWidth, 34, 17);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText(category, badgeX + 18, badgeY + 22);
+
+  // 7. HERO: Project Name in Large, Bold, Modern Font
+  ctx.textAlign = 'left';
+  ctx.font = '900 62px Figtree, "Plus Jakarta Sans", -apple-system, sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.shadowColor = theme.primary;
+  ctx.shadowBlur = 24;
+
+  const words = title.split(' ');
+  let line1 = '';
+  let line2 = '';
+  if (words.length > 2) {
+    const half = Math.ceil(words.length / 2);
+    line1 = words.slice(0, half).join(' ');
+    line2 = words.slice(half).join(' ');
+  } else if (title.length > 13 && words.length === 2) {
+    line1 = words[0];
+    line2 = words[1];
+  } else {
+    line1 = title;
+  }
+
+  const titleStartY = 330;
+  ctx.fillText(line1, pad + 32, titleStartY);
+  if (line2) {
+    ctx.fillText(line2, pad + 32, titleStartY + 76);
+  }
+  ctx.shadowBlur = 0; // reset shadow blur
+
+  // 8. Performance Tagline / Metrics
+  const metricY = line2 ? titleStartY + 155 : titleStartY + 85;
+  ctx.font = '500 17px monospace, sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+  ctx.fillText(`⚡ ${metrics}`, pad + 32, metricY);
+
+  // Divider Accent Line
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+  ctx.beginPath();
+  ctx.moveTo(pad + 32, metricY + 36);
+  ctx.lineTo(w - pad - 32, metricY + 36);
+  ctx.stroke();
+
+  // 9. Tech Stack Badges
+  const techY = metricY + 75;
+  let curX = pad + 32;
+  ctx.font = '600 16px monospace, sans-serif';
+  tech.slice(0, 4).forEach(t => {
+    const tWidth = ctx.measureText(t).width + 24;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+    ctx.beginPath();
+    drawRoundRectFallback(ctx, curX, techY, tWidth, 34, 8);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.fillText(t, curX + 12, techY + 22);
+    curX += tWidth + 12;
+  });
+
+  // 10. Bottom Interactive Launch Prompt
+  const btmY = h - pad - 95;
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.beginPath();
+  drawRoundRectFallback(ctx, pad + 32, btmY, w - (pad + 32) * 2, 54, 27);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.textAlign = 'center';
+  ctx.font = '700 16px monospace, sans-serif';
+  ctx.fillStyle = theme.primary;
+  ctx.fillText('CLICK TO LAUNCH APPLICATION ↗', w / 2, btmY + 33);
+
+  return canvas;
+}
+
 class Media {
   constructor({
     geometry,
@@ -223,9 +440,12 @@ class Media {
     this.onResize();
   }
   createShader() {
+    const cardCanvas = createProjectCardCanvas(this.itemData || { text: this.text, title: this.text }, this.index);
     const texture = new Texture(this.gl, {
       generateMipmaps: true
     });
+    texture.image = cardCanvas;
+
     this.program = new Program(this.gl, {
       depthTest: false,
       depthWrite: false,
@@ -251,6 +471,8 @@ class Media {
         uniform vec2 uPlaneSizes;
         uniform sampler2D tMap;
         uniform float uBorderRadius;
+        uniform float uTime;
+        uniform float uSpeed;
         varying vec2 vUv;
         
         float roundedBoxSDF(vec2 p, vec2 b, float r) {
@@ -259,42 +481,36 @@ class Media {
         }
         
         void main() {
-          vec2 ratio = vec2(
-            min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
-            min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
-          );
-          vec2 uv = vec2(
-            vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-            vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
-          );
-          vec4 color = texture2D(tMap, uv);
+          vec4 color = texture2D(tMap, vUv);
           
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           
           // Smooth antialiasing for edges
-          float edgeSmooth = 0.002;
+          float edgeSmooth = 0.003;
           float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
           
-          gl_FragColor = vec4(color.rgb, alpha);
+          // Living holographic light sweep animation across the card
+          float sweep = sin(vUv.x * 2.8 - vUv.y * 1.8 + uTime * 1.8);
+          float shine = smoothstep(0.92, 1.0, sweep) * 0.16;
+
+          // Glowing border stroke animation
+          float stroke = smoothstep(0.015, 0.001, abs(d));
+          vec3 borderTint = mix(vec3(0.48, 1.0, 0.4), vec3(0.7, 0.59, 0.81), sin(uTime * 0.8 + vUv.x * 3.14) * 0.5 + 0.5);
+
+          vec3 finalRgb = color.rgb + vec3(shine) + borderTint * stroke * 0.35;
+          gl_FragColor = vec4(finalRgb, alpha);
         }
       `,
       uniforms: {
         tMap: { value: texture },
         uPlaneSizes: { value: [0, 0] },
-        uImageSizes: { value: [0, 0] },
+        uImageSizes: { value: [cardCanvas.width, cardCanvas.height] },
         uSpeed: { value: 0 },
-        uTime: { value: 100 * Math.random() },
+        uTime: { value: this.index * 1.2 },
         uBorderRadius: { value: this.borderRadius }
       },
       transparent: true
     });
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = this.image;
-    img.onload = () => {
-      texture.image = img;
-      this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
-    };
   }
   createMesh() {
     this.plane = new Mesh(this.gl, {
@@ -304,15 +520,10 @@ class Media {
     this.plane.setParent(this.scene);
   }
   createTitle() {
-    this.title = new Title({
-      gl: this.gl,
-      plane: this.plane,
-      renderer: this.renderer,
-      text: this.text,
-      textColor: this.textColor,
-      font: this.font
-    });
+    // Project names are rendered boldly and beautifully onto the 3D card canvas
+    this.title = null;
   }
+
   update(scroll) {
     const halfTotal = this.widthTotal / 2;
     // Continuous mathematical modulo wrapping around center
