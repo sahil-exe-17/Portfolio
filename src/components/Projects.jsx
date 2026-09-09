@@ -5,8 +5,8 @@ import { FaGithub as Github } from 'react-icons/fa';
 import CircularGallery from './CircularGallery';
 
 const GALLERY_ITEMS = [
-  { image: "/projects/stackflow-ai.svg", text: "StackFlow AI", id: "stackflow-ai" },
-  { image: "/projects/cryptopulse-ai.svg", text: "CryptoPulse AI", id: "cryptopulse-ai" },
+  { image: "/projects/stackflow-ai.png", text: "StackFlow AI", id: "stackflow-ai" },
+  { image: "/projects/cryptopulse-ai.png", text: "CryptoPulse AI", id: "cryptopulse-ai" },
   { image: "/projects/treenova.svg", text: "TreeNova BST", id: "treenova" },
   { image: "/projects/matchmind-ai.svg", text: "MatchMind AI", id: "matchmind-ai" },
   { image: "/projects/stock-sense-ai.svg", text: "Stock Sense AI", id: "stock-sense-ai" },
@@ -16,9 +16,9 @@ const GALLERY_ITEMS = [
   { image: "/projects/spectra-ai.svg", text: "Spectra AI", id: "spectra-ai" },
   { image: "/projects/ml-classifier.svg", text: "ML Classifier", id: "ml-classifier" },
   { image: "/projects/earniq.svg", text: "EarnIQ", id: "earniq" },
-  { image: "/projects/pune-traffic.svg", text: "Pune Traffic", id: "pune-traffic" },
-  { image: "/projects/zentrix.svg", text: "ZentriX App", id: "zentrix" },
-  { image: "/projects/intelaris.svg", text: "Intelaris", id: "intelaris" },
+  { image: "/projects/pune-traffic.png", text: "Pune Traffic", id: "pune-traffic" },
+  { image: "/projects/zentrix.png", text: "ZentriX App", id: "zentrix" },
+  { image: "/projects/intelaris.png", text: "Intelaris", id: "intelaris" },
   { image: "/projects/yt-predictor.svg", text: "YT Predictor", id: "yt-predictor" },
 ];
 
