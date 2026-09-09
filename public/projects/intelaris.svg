@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg-intelaris" x1="0" y1="0" x2="800" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0e0e14" />
+      <stop offset="50%" stop-color="#070709" />
+      <stop offset="100%" stop-color="#040406" />
+    </linearGradient>
+    <linearGradient id="accent-intelaris" x1="0" y1="0" x2="800" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#A855F7" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+    <radialGradient id="glow-intelaris" cx="70%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#A855F7" stop-opacity="0.25" />
+      <stop offset="50%" stop-color="#06B6D4" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <filter id="blur-intelaris">
+      <feGaussianBlur stdDeviation="40" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" rx="24" fill="url(#bg-intelaris)" />
+  <circle cx="580" cy="220" r="180" fill="url(#glow-intelaris)" filter="url(#blur-intelaris)" />
+
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="400" x2="800" y2="400" />
+    <line x1="0" y1="500" x2="800" y2="500" />
+    <line x1="160" y1="0" x2="160" y2="600" />
+    <line x1="320" y1="0" x2="320" y2="600" />
+    <line x1="480" y1="0" x2="480" y2="600" />
+    <line x1="640" y1="0" x2="640" y2="600" />
+  </g>
+
+  <rect x="40" y="40" width="720" height="520" rx="20" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+  <path d="M40 120 V50 A10 10 0 0 1 50 40 H140" fill="none" stroke="url(#accent-intelaris)" stroke-width="3" stroke-linecap="round" />
+  <path d="M760 480 V550 A10 10 0 0 1 750 560 H660" fill="none" stroke="url(#accent-intelaris)" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Category Badge -->
+  <rect x="70" y="75" width="220" height="32" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)" />
+  <circle cx="86" cy="91" r="4" fill="#A855F7" />
+  <text x="100" y="96" fill="rgba(255,255,255,0.8)" font-family="monospace" font-size="12" letter-spacing="1.5">INTERACTIVE LOGIC GAME</text>
+  <text x="730" y="96" fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="11" letter-spacing="1" text-anchor="end">Adaptive Difficulty // Logic Engine</text>
+
+  <!-- Graphic Display Window -->
+  <rect x="70" y="130" width="660" height="280" rx="16" fill="#09090d" stroke="rgba(255,255,255,0.08)" stroke-width="1.2" />
+  <rect x="70" y="130" width="660" height="36" rx="16" fill="rgba(255,255,255,0.03)" />
+  <circle cx="95" cy="148" r="4" fill="#ff5f56" />
+  <circle cx="110" cy="148" r="4" fill="#ffbd2e" />
+  <circle cx="125" cy="148" r="4" fill="#27c93f" />
+
+  <!-- Logic Mystery Grid Graphic -->
+  <g transform="translate(200, 185)">
+    <rect x="0" y="0" width="90" height="90" rx="14" fill="rgba(255,255,255,0.04)" stroke="#A855F7" stroke-width="2" />
+    <text x="45" y="55" fill="#ffffff" font-family="monospace" font-weight="700" font-size="32" text-anchor="middle">7</text>
+    
+    <rect x="110" y="0" width="90" height="90" rx="14" fill="rgba(255,255,255,0.04)" stroke="#06B6D4" stroke-width="2" />
+    <text x="155" y="55" fill="#ffffff" font-family="monospace" font-weight="700" font-size="32" text-anchor="middle">4</text>
+    
+    <rect x="220" y="0" width="90" height="90" rx="14" fill="rgba(255,255,255,0.04)" stroke="url(#accent-intelaris)" stroke-width="2" />
+    <text x="265" y="55" fill="#00FFA3" font-family="monospace" font-weight="700" font-size="32" text-anchor="middle">2</text>
+    
+    <rect x="330" y="0" width="90" height="90" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="4,4" />
+    <text x="375" y="55" fill="rgba(255,255,255,0.4)" font-family="monospace" font-weight="700" font-size="32" text-anchor="middle">?</text>
+  </g>
+
+  <!-- Title & Tech Footer -->
+  <text x="70" y="460" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="34" letter-spacing="-1">Intelaris</text>
+  <text x="70" y="490" fill="rgba(255,255,255,0.55)" font-family="system-ui, sans-serif" font-size="15">Adaptive logic deduction game with streak tracking and glassmorphism design.</text>
+  <rect x="70" y="515" width="65" height="24" rx="6" fill="rgba(255,255,255,0.06)" />
+  <text x="102" y="531" fill="rgba(255,255,255,0.8)" font-family="monospace" font-size="11" text-anchor="middle">REACT</text>
+  <rect x="143" y="515" width="80" height="24" rx="6" fill="rgba(255,255,255,0.06)" />
+  <text x="183" y="531" fill="rgba(255,255,255,0.8)" font-family="monospace" font-size="11" text-anchor="middle">TAILWIND</text>
+  <rect x="231" y="515" width="115" height="24" rx="6" fill="rgba(255,255,255,0.06)" />
+  <text x="288" y="531" fill="rgba(255,255,255,0.8)" font-family="monospace" font-size="11" text-anchor="middle">FRAMER MOTION</text>
+</svg>
