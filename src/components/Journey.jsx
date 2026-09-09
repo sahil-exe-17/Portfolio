@@ -7,8 +7,8 @@ const MILESTONES = [
     period: "2024 — PRESENT",
     title: "AI & Full-Stack Systems Engineering",
     institution: "Autonomous Architectures & Real-World Deployments",
-    description: "Architected and shipped 15+ production-grade web applications and AI engines spanning LLM-assisted tutors (StackFlow AI), live crypto intelligence platforms (CryptoPulse AI), sports predictive ensembles (MatchMind AI), and fintech models (Stock Sense AI).",
-    badge: "15+ APPS DEPLOYED",
+    description: "Architected and shipped 16+ production-grade web applications and AI engines spanning LLM-assisted tutors (StackFlow AI), intelligent PropTech valuation (EstateIQ AI), live crypto intelligence platforms (CryptoPulse AI), sports predictive ensembles (MatchMind AI), and fintech models (Stock Sense AI).",
+    badge: "16+ APPS DEPLOYED",
     icon: <Rocket size={20} className="text-white" />,
   },
   {

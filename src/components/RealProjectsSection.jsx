@@ -8,6 +8,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const realProjects = [
   {
+    title: "EstateIQ AI",
+    category: "PropTech Valuation & AI Platform",
+    desc: "An intelligent PropTech platform combining Scikit-Learn ML models with Groq GenAI for instant property valuations, algorithmic ROI investment scoring, and interactive AI market intelligence.",
+    link: "https://estateiq-ai-omega.vercel.app/",
+    color: "#07120e"
+  },
+  {
     title: "StackFlow AI",
     category: "AI Algorithmic Engine",
     desc: "An interactive educational platform visualizing complex data structures with real-time Groq AI tutor explanations and dynamic execution tracking.",

@@ -8,8 +8,33 @@ import ElectricBorder from './ElectricBorder';
 
 const ALL_PROJECTS = [
   {
-    id: "stackflow-ai",
+    id: "estateiq-ai",
     number: "01",
+    title: "EstateIQ AI",
+    category: "PropTech Valuation & AI Platform",
+    domain: "ai",
+    desc: "An intelligent PropTech valuation and investment platform combining Scikit-Learn ML pricing models with Groq GenAI market intelligence for instant property valuations, algorithmic ROI scoring, and micro-market insights.",
+    tech: ["React 19", "TypeScript", "FastAPI", "Python", "Scikit-Learn", "Groq API", "Tailwind CSS"],
+    liveUrl: "https://estateiq-ai-omega.vercel.app/",
+    githubUrl: "https://github.com/sahil-exe-17",
+    metrics: "Random Forest ML // Groq GenAI Consultant",
+    caseStudy: {
+      problem: "Navigating real estate investments and fair market valuations often feels opaque, complex, and slow, with fragmented data and no predictive ROI guidance.",
+      approach: "Trained a Random Forest Regressor on comprehensive multi-parameter property features coupled with Groq LLM inference for lightning-fast, context-aware property consultation.",
+      architecture: [
+        "Scikit-Learn Random Forest Regressor & preprocessing pipeline",
+        "FastAPI high-throughput valuation inference microservice",
+        "Algorithmic investment scoring (0–100) & rental yield predictor",
+        "Smart micro-market locality recommendation engine",
+        "Sub-50ms Groq conversational real estate advisor",
+        "React 19, TypeScript, and interactive canvas visual animations"
+      ],
+      solution: "Instant accurate valuations with confidence intervals, ROI scoring, alternative high-growth micro-market recommendations, and interactive AI consultation."
+    }
+  },
+  {
+    id: "stackflow-ai",
+    number: "02",
     title: "StackFlow AI",
     category: "AI Algorithmic Engine",
     domain: "ai",
@@ -27,7 +52,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "cryptopulse-ai",
-    number: "02",
+    number: "03",
     title: "CryptoPulse AI",
     category: "Crypto Intelligence Platform",
     domain: "fintech",
@@ -45,7 +70,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "treenova",
-    number: "03",
+    number: "04",
     title: "TreeNova BST",
     category: "Educational Algorithm Tool",
     domain: "tools",
@@ -63,7 +88,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "matchmind-ai",
-    number: "04",
+    number: "05",
     title: "MatchMind AI",
     category: "AI Intelligence Platform",
     domain: "ai",
@@ -81,7 +106,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "stock-sense-ai",
-    number: "05",
+    number: "06",
     title: "Stock Sense AI",
     category: "AI Fintech Platform",
     domain: "fintech",
@@ -99,7 +124,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "ascendia-ai",
-    number: "06",
+    number: "07",
     title: "Ascendia AI",
     category: "AI Placement Assistant",
     domain: "ai",
@@ -117,7 +142,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "culina-ai",
-    number: "07",
+    number: "08",
     title: "Culina AI",
     category: "Full Stack AI App",
     domain: "ai",
@@ -135,7 +160,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "travix-ai",
-    number: "08",
+    number: "09",
     title: "Travix AI",
     category: "Generative AI Agent",
     domain: "ai",
@@ -153,7 +178,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "spectra-ai",
-    number: "09",
+    number: "10",
     title: "Spectra AI",
     category: "AI Productivity Suite",
     domain: "tools",
@@ -171,7 +196,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "ml-classifier",
-    number: "10",
+    number: "11",
     title: "ML Classifier Studio",
     category: "Interactive ML Platform",
     domain: "ai",
@@ -189,7 +214,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "earniq",
-    number: "11",
+    number: "12",
     title: "EarnIQ",
     category: "Data Science Platform",
     domain: "fintech",
@@ -207,7 +232,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "pune-traffic",
-    number: "12",
+    number: "13",
     title: "Pune Traffic Jam Predictor",
     category: "Smart City Infrastructure",
     domain: "tools",
@@ -225,7 +250,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "zentrix",
-    number: "13",
+    number: "14",
     title: "ZentriX App",
     category: "Web Application",
     domain: "tools",
@@ -243,7 +268,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "intelaris",
-    number: "14",
+    number: "15",
     title: "Intelaris",
     category: "Interactive Logic Game",
     domain: "tools",
@@ -261,7 +286,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "yt-predictor",
-    number: "15",
+    number: "16",
     title: "YT Predictor",
     category: "ML Analytics Dashboard",
     domain: "ai",
@@ -294,7 +319,7 @@ const GALLERY_ITEMS = ALL_PROJECTS.map((p, idx) => ({
 
 export default function Projects() {
   const galleryRef = useRef(null);
-  const [activeProjectId, setActiveProjectId] = useState("stackflow-ai");
+  const [activeProjectId, setActiveProjectId] = useState("estateiq-ai");
   const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
 
   const activeProject = ALL_PROJECTS.find(p => p.id === activeProjectId) || ALL_PROJECTS[0];
@@ -341,7 +366,7 @@ export default function Projects() {
           </div>
           <div className="space-y-1 text-left md:text-right">
             <p className="text-xs sm:text-sm font-mono text-white/60">
-              15 PRODUCTION ENGINES, ALGORITHMS &amp; PLATFORMS
+              16 PRODUCTION ENGINES, ALGORITHMS &amp; PLATFORMS
             </p>
             <p className="text-[10px] sm:text-[11px] font-mono text-white/40">
               DRAG CYLINDER // CLICK ANY PROJECT TO LAUNCH DIRECTLY
@@ -498,7 +523,7 @@ export default function Projects() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Quick 15-Project Navigation Pills */}
+            {/* Quick 16-Project Navigation Pills */}
             <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10 flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none touch-pan-x">
               <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 mr-1 sm:mr-2 shrink-0">
                 Jump To:
