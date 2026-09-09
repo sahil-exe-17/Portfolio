@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, MapPin, Phone, Mail, Brain, Sparkles } from 'lucide-react';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import ElectricBorder from './ElectricBorder';
 
 const STATS = [
   { label: 'AI Systems Automation', value: 95 },
@@ -77,83 +78,101 @@ export default function About() {
             </div>
 
             {/* Capability Metrics / Diagnostics Panel */}
-            <div className="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden border border-white/15">
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-                <div className="flex items-center gap-2 text-xs font-mono tracking-wider text-white/70 uppercase">
-                  <Brain size={14} className="text-white" />
-                  <span>System Diagnostics // Core Capabilities</span>
-                </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/20">
-                  OPTIMAL
-                </span>
-              </div>
-
-              <div className="space-y-5">
-                {STATS.map((stat, i) => (
-                  <div key={stat.label} className="space-y-2">
-                    <div className="flex justify-between text-xs font-mono tracking-wider">
-                      <span className="text-white/70">{stat.label}</span>
-                      <span className="text-white font-bold">{stat.value}%</span>
-                    </div>
-                    <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${stat.value}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: 0.1 * i, ease: 'easeOut' }}
-                        className="h-full rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.7)]"
-                      />
-                    </div>
+            <ElectricBorder
+              color="#7cff67"
+              speed={0.5}
+              chaos={0.05}
+              thickness={1.1}
+              borderRadius={24}
+              className="w-full"
+            >
+              <div className="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden border border-white/15">
+                <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                  <div className="flex items-center gap-2 text-xs font-mono tracking-wider text-white/70 uppercase">
+                    <Brain size={14} className="text-white" />
+                    <span>System Diagnostics // Core Capabilities</span>
                   </div>
-                ))}
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/20">
+                    OPTIMAL
+                  </span>
+                </div>
+
+                <div className="space-y-5">
+                  {STATS.map((stat, i) => (
+                    <div key={stat.label} className="space-y-2">
+                      <div className="flex justify-between text-xs font-mono tracking-wider">
+                        <span className="text-white/70">{stat.label}</span>
+                        <span className="text-white font-bold">{stat.value}%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${stat.value}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1.2, delay: 0.1 * i, ease: 'easeOut' }}
+                          className="h-full rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.7)]"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            </ElectricBorder>
           </div>
 
           {/* Right Column: Education & Contact Cards */}
           <div className="lg:col-span-5 space-y-6">
             {/* Education Glass Card */}
-            <div className="glass-card p-8 rounded-3xl relative overflow-hidden group border border-white/15">
-              <div className="flex items-center justify-between mb-6">
-                <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10 text-white">
-                  <GraduationCap size={24} />
+            <ElectricBorder
+              color="#B497CF"
+              speed={0.5}
+              chaos={0.05}
+              thickness={1.1}
+              borderRadius={24}
+              className="w-full"
+            >
+              <div className="glass-card p-8 rounded-3xl relative overflow-hidden group border border-white/15">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10 text-white">
+                    <GraduationCap size={24} />
+                  </div>
+                  <span className="text-xs font-mono uppercase tracking-widest text-white/70">
+                    ACADEMIC FOUNDATION
+                  </span>
                 </div>
-                <span className="text-xs font-mono uppercase tracking-widest text-white/70">
-                  ACADEMIC FOUNDATION
-                </span>
+
+                <h3 className="text-2xl font-bold font-heading text-white tracking-tight mb-2">
+                  MIT World Peace University
+                </h3>
+                <p className="text-sm font-light text-white/70 mb-6">
+                  Integrated B.Tech in Computer Science<br />
+                  <span className="text-white/50 text-xs font-mono">Specialization: Artificial Intelligence & Data Science</span>
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/10">
+                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block mb-1">
+                      CUMULATIVE CGPA
+                    </span>
+                    <span className="text-3xl sm:text-4xl font-mono font-bold text-white">
+                      8.9
+                    </span>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block mb-1">
+                      HONORS & AWARDS
+                    </span>
+                    <span className="text-sm font-semibold text-white block">
+                      MIT-WPU II
+                    </span>
+                    <span className="text-xs font-mono text-white/60">
+                      Scholarship (2024)
+                    </span>
+                  </div>
+                </div>
               </div>
-
-              <h3 className="text-2xl font-bold font-heading text-white tracking-tight mb-2">
-                MIT World Peace University
-              </h3>
-              <p className="text-sm font-light text-white/70 mb-6">
-                Integrated B.Tech in Computer Science<br />
-                <span className="text-white/50 text-xs font-mono">Specialization: Artificial Intelligence & Data Science</span>
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/10">
-                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block mb-1">
-                    CUMULATIVE CGPA
-                  </span>
-                  <span className="text-3xl sm:text-4xl font-mono font-bold text-white">
-                    8.9
-                  </span>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block mb-1">
-                    HONORS & AWARDS
-                  </span>
-                  <span className="text-sm font-semibold text-white block">
-                    MIT-WPU II
-                  </span>
-                  <span className="text-xs font-mono text-white/60">
-                    Scholarship (2024)
-                  </span>
-                </div>
-              </div>
-            </div>
+            </ElectricBorder>
 
             {/* Direct Connect Glass Card */}
             <div className="glass-card p-8 rounded-3xl relative border border-white/15">

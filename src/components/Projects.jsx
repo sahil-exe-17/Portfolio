@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, ArrowUpRight, Sparkles, X, ChevronRight, ChevronLeft, CheckCircle2, Terminal, Code2, Cpu } from 'lucide-react';
 import { FaGithub as Github } from 'react-icons/fa';
 import CircularGallery from './CircularGallery';
+import ElectricBorder from './ElectricBorder';
 
 const GALLERY_ITEMS = [
   { image: "/projects/stackflow-ai.png", text: "StackFlow AI", id: "stackflow-ai" },
@@ -353,7 +354,15 @@ export default function Projects() {
         </div>
 
         {/* 3D Circular Cylinder Showcase Vessel */}
-        <div className="relative w-full rounded-[2.5rem] border border-white/15 bg-gradient-to-b from-white/[0.05] via-[#09090f]/90 to-black/95 p-5 sm:p-8 lg:p-10 overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+        <ElectricBorder
+          color="#7cff67"
+          speed={0.5}
+          chaos={0.06}
+          thickness={1.2}
+          borderRadius={40}
+          className="w-full"
+        >
+          <div className="relative w-full rounded-[2.5rem] border border-white/15 bg-gradient-to-b from-white/[0.05] via-[#09090f]/90 to-black/95 p-5 sm:p-8 lg:p-10 overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.8)] backdrop-blur-xl">
           
           {/* Top Bar with Mode and Navigation Buttons */}
           <div className="flex items-center justify-between gap-4 pb-4 border-b border-white/10">
@@ -520,6 +529,7 @@ export default function Projects() {
           </div>
 
         </div>
+        </ElectricBorder>
 
       </div>
 
@@ -540,15 +550,24 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 260 }}
-              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto glass-card bg-[#0e0e14]/95 border-white/20 p-6 sm:p-10 rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] z-10"
+              className="relative w-full max-w-2xl z-10"
             >
-              <button
-                onClick={() => setSelectedCaseStudy(null)}
-                className="absolute top-6 right-6 p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white transition-colors"
-                aria-label="Close modal"
+              <ElectricBorder
+                color="#B497CF"
+                speed={0.5}
+                chaos={0.05}
+                thickness={1.1}
+                borderRadius={24}
+                className="w-full"
               >
-                <X size={18} />
-              </button>
+                <div className="relative w-full max-h-[85vh] overflow-y-auto glass-card bg-[#0e0e14]/95 border-white/20 p-6 sm:p-10 rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)]">
+                  <button
+                    onClick={() => setSelectedCaseStudy(null)}
+                    className="absolute top-6 right-6 p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white transition-colors"
+                    aria-label="Close modal"
+                  >
+                    <X size={18} />
+                  </button>
 
               <div className="space-y-6">
                 <div>
@@ -640,9 +659,11 @@ export default function Projects() {
                         <ExternalLink size={14} />
                       </a>
                     )}
+                    </div>
                   </div>
                 </div>
               </div>
+              </ElectricBorder>
             </motion.div>
           </div>
         )}

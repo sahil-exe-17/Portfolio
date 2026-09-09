@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, ArrowUpRight, Check, Sparkles } from 'lucide-react';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import ElectricBorder from './ElectricBorder';
 
 export default function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
@@ -139,7 +140,15 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-7"
           >
-            <div className="glass-card p-8 sm:p-12 rounded-3xl border border-white/20 relative shadow-[0_25px_80px_rgba(0,0,0,0.8)]">
+            <ElectricBorder
+              color="#7cff67"
+              speed={0.5}
+              chaos={0.05}
+              thickness={1.1}
+              borderRadius={24}
+              className="w-full"
+            >
+              <div className="glass-card p-8 sm:p-12 rounded-3xl border border-white/20 relative shadow-[0_25px_80px_rgba(0,0,0,0.8)]">
               <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-2">
                 <span>Send A Direct Message</span>
                 <Sparkles size={18} className="text-white" />
@@ -211,6 +220,7 @@ export default function Contact() {
                 </button>
               </form>
             </div>
+            </ElectricBorder>
           </motion.div>
 
         </div>

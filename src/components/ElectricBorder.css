@@ -1,0 +1,81 @@
+.electric-border {
+  --electric-border-color: #7cff67;
+  --electric-light-color: var(--electric-border-color);
+  position: relative;
+  border-radius: inherit;
+  overflow: visible;
+  isolation: isolate;
+  display: block;
+}
+
+@supports (color: oklch(from red l c h)) {
+  .electric-border {
+    --electric-light-color: oklch(from var(--electric-border-color) l c h);
+  }
+}
+
+.eb-canvas-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.eb-canvas {
+  display: block;
+}
+
+.eb-content {
+  position: relative;
+  border-radius: inherit;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.eb-layers {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.eb-glow-1,
+.eb-glow-2,
+.eb-background-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+/* Subtle, refined cyber-containment glow (calm, non-glossy) */
+.eb-glow-1 {
+  border: 1px solid var(--electric-border-color);
+  opacity: 0.22;
+  filter: blur(1px);
+}
+
+.eb-glow-2 {
+  border: 1px solid var(--electric-light-color);
+  opacity: 0.16;
+  filter: blur(4px);
+}
+
+.eb-background-glow {
+  z-index: -1;
+  transform: scale(1.01);
+  filter: blur(22px);
+  opacity: 0.08;
+  background: linear-gradient(
+    -30deg,
+    var(--electric-light-color),
+    transparent 50%,
+    var(--electric-border-color)
+  );
+}
+
