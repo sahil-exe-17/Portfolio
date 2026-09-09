@@ -11,7 +11,6 @@ import Journey from './components/Journey';
 import TechStack from './components/TechStack';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -60,8 +59,6 @@ export default function App() {
         {/* Minimal Luxury Footer */}
         <Footer />
 
-        {/* Cyber Magnetic Cursor Follower */}
-        <CustomCursor />
       </div>
     </SmoothScroll>
   );
