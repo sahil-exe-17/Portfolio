@@ -618,7 +618,7 @@ class App {
     this.renderer = new Renderer({
       alpha: true,
       antialias: true,
-      dpr: Math.min(window.devicePixelRatio || 1, 2),
+      dpr: Math.min(window.devicePixelRatio || 1, 1.5),
       powerPreference: 'high-performance'
     });
     this.gl = this.renderer.gl;
@@ -634,9 +634,10 @@ class App {
     this.scene = new Transform();
   }
   createGeometry() {
+    // 16x24 segments instead of 50x100 cuts 92% of redundant vertex shading overhead
     this.planeGeometry = new Plane(this.gl, {
-      heightSegments: 50,
-      widthSegments: 100
+      heightSegments: 16,
+      widthSegments: 24
     });
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
@@ -863,6 +864,24 @@ class App {
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
     this.raf = window.requestAnimationFrame(this.update.bind(this));
+  }
+  setupIntersectionObserver() {
+    this.observer = new IntersectionObserver(([entry]) => {
+      this.isIntersecting = entry.isIntersecting;
+      if (this.isIntersecting) {
+        if (!this.raf) {
+          this.raf = window.requestAnimationFrame(this.update.bind(this));
+        }
+      } else {
+        if (this.raf) {
+          window.cancelAnimationFrame(this.raf);
+          this.raf = 0;
+        }
+      }
+    }, { threshold: 0.05 });
+    if (this.container) {
+      this.observer.observe(this.container);
+    }
   }
   addEventListeners() {
     this.boundOnResize = this.onResize.bind(this);

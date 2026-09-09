@@ -110,10 +110,31 @@ export default function Hero() {
 
           <div className="hidden sm:flex items-center gap-4 pl-4 border-l border-white/10 text-xs font-mono text-white/50">
             <div className="flex items-center gap-1.5">
-              <Code2 size={14} className="text-white" />
-              <span>15+ APPS SHIPPED</span>
+              <Code2 size={14} className="text-[#7cff67]" />
+              <span className="text-white/80 font-bold">15+ APPS SHIPPED</span>
+            </div>
+            <div className="flex items-center gap-1.5 pl-3 border-l border-white/10">
+              <span className="w-2 h-2 rounded-full bg-[#7cff67] animate-ping" />
+              <span className="text-[#7cff67]">SUB-50MS LATENCY</span>
             </div>
           </div>
+        </motion.div>
+
+        {/* Crazy Cyber Tech Pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-8 flex flex-wrap gap-2 pt-4"
+        >
+          {['⚡ GROQ AI 50ms', '🧠 PYTORCH & GEMINI', '⚛ REACT 19 & NEXT.JS', '🔮 3D WEBGL CYLINDER', '🚀 100% VIBECODED'].map((badge, idx) => (
+            <span
+              key={badge}
+              className="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white/[0.04] border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-all hover:scale-105 select-none cursor-default"
+            >
+              {badge}
+            </span>
+          ))}
         </motion.div>
       </div>
 

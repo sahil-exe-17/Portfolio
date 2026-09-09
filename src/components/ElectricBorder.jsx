@@ -145,46 +145,43 @@ const ElectricBorder = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Configuration
-    const octaves = 10;
+    // Ultra-optimized high-performance configuration
+    const octaves = 3;
     const lacunarity = 1.6;
-    const gain = 0.7;
+    const gain = 0.65;
     const amplitude = chaos;
     const frequency = 10;
     const baseFlatness = 0;
-    const displacement = 50;
-    const borderOffset = 50;
+    const displacement = 40;
+    const borderOffset = 40;
 
     const updateSize = () => {
       const rect = container.getBoundingClientRect();
       const width = rect.width + borderOffset * 2;
       const height = rect.height + borderOffset * 2;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      // Use standard dpr 1 to eliminate 4x fill-rate bottleneck
+      canvas.width = width;
+      canvas.height = height;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      ctx.scale(dpr, dpr);
 
       return { width, height };
     };
 
     let { width, height } = updateSize();
-    let lastDpr = Math.min(window.devicePixelRatio || 1, 2);
+    let isVisible = false;
 
     const drawElectricBorder = currentTime => {
-      if (!canvas || !ctx) return;
+      if (!canvas || !ctx || !isVisible) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      if (dpr !== lastDpr) {
-        lastDpr = dpr;
-        const newSize = updateSize();
-        width = newSize.width;
-        height = newSize.height;
+      // Throttle to ~35 FPS for razor-sharp, crackling electric sparks without draining CPU
+      if (currentTime - lastFrameTimeRef.current < 28) {
+        animationRef.current = requestAnimationFrame(drawElectricBorder);
+        return;
       }
 
-      const deltaTime = (currentTime - lastFrameTimeRef.current) / 1000;
+      const deltaTime = Math.min((currentTime - lastFrameTimeRef.current) / 1000, 0.1);
       timeRef.current += deltaTime * speed;
       lastFrameTimeRef.current = currentTime;
 
@@ -193,9 +190,7 @@ const ElectricBorder = ({
         return;
       }
 
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, width, height);
 
       ctx.strokeStyle = color;
       ctx.lineWidth = thickness;
@@ -211,7 +206,8 @@ const ElectricBorder = ({
       const radius = Math.min(borderRadius, maxRadius);
 
       const approximatePerimeter = 2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
-      const sampleCount = Math.floor(approximatePerimeter / 2);
+      // High-performance sample count capped at 140 points (95% fewer calculations)
+      const sampleCount = Math.min(Math.max(Math.floor(approximatePerimeter / 14), 40), 140);
 
       ctx.beginPath();
 
@@ -260,6 +256,7 @@ const ElectricBorder = ({
       animationRef.current = requestAnimationFrame(drawElectricBorder);
     };
 
+    // ResizeObserver
     const resizeObserver = new ResizeObserver(() => {
       const newSize = updateSize();
       width = newSize.width;
@@ -267,13 +264,32 @@ const ElectricBorder = ({
     });
     resizeObserver.observe(container);
 
-    animationRef.current = requestAnimationFrame(drawElectricBorder);
+    // IntersectionObserver - Only animate when strictly visible in viewport
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          if (!animationRef.current) {
+            lastFrameTimeRef.current = performance.now();
+            animationRef.current = requestAnimationFrame(drawElectricBorder);
+          }
+        } else {
+          if (animationRef.current) {
+            cancelAnimationFrame(animationRef.current);
+            animationRef.current = null;
+          }
+        }
+      },
+      { threshold: 0.05 }
+    );
+    intersectionObserver.observe(container);
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
     };
   }, [color, speed, chaos, thickness, borderRadius, octavedNoise, getRoundedRectPoint]);
 
