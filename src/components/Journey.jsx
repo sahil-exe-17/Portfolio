@@ -4,11 +4,19 @@ import { GraduationCap, Award, Rocket, Database } from 'lucide-react';
 
 const MILESTONES = [
   {
+    period: "2025",
+    title: "Smart India Hackathon 2025 — India Intern AI",
+    institution: "Ministry of Corporate Affairs / PM Internship Scheme (PS ID: 25034)",
+    description: "Architected India Intern AI: an intelligent NLP-powered recommendation and candidate ranking engine for the PM Internship Scheme, connecting students from rural and underserved regions with high-fit opportunities.",
+    badge: "SIH 2025 INNOVATOR",
+    icon: <Award size={20} className="text-white" />,
+  },
+  {
     period: "2024 — PRESENT",
     title: "AI & Full-Stack Systems Engineering",
     institution: "Autonomous Architectures & Real-World Deployments",
-    description: "Architected and shipped 16+ production-grade web applications and AI engines spanning LLM-assisted tutors (StackFlow AI), intelligent PropTech valuation (EstateIQ AI), live crypto intelligence platforms (CryptoPulse AI), sports predictive ensembles (MatchMind AI), and fintech models (Stock Sense AI).",
-    badge: "16+ APPS DEPLOYED",
+    description: "Architected and shipped 17+ production-grade web applications and AI engines spanning LLM-assisted tutors (StackFlow AI), PropTech valuation platforms (EstateIQ AI), GovTech recommendation engines (India Intern AI), live crypto intelligence (CryptoPulse AI), and predictive sports ensembles (MatchMind AI).",
+    badge: "17+ APPS DEPLOYED",
     icon: <Rocket size={20} className="text-white" />,
   },
   {

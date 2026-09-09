@@ -8,8 +8,33 @@ import ElectricBorder from './ElectricBorder';
 
 const ALL_PROJECTS = [
   {
-    id: "estateiq-ai",
+    id: "india-intern-ai",
     number: "01",
+    title: "India Intern AI",
+    category: "SIH 2025 // GovTech AI Engine",
+    domain: "ai",
+    desc: "Smart India Hackathon 2025 Project (PS ID: 25034): An AI-driven internship recommendation engine & recruiter ranking platform for the PM Internship Scheme, connecting students from rural and underserved regions with high-fit opportunities.",
+    tech: ["Python", "NLP", "Scikit-Learn", "React 19", "FastAPI", "Vector Search", "Tailwind CSS"],
+    liveUrl: "https://lnkd.in/dt8WygUn",
+    githubUrl: "https://github.com/sahil-exe-17",
+    metrics: "SIH 2025 PS ID: 25034 // NLP Skill Graph",
+    caseStudy: {
+      problem: "The PM Internship Scheme receives thousands of applications across India, but applicants from rural and underserved regions face limited exposure, lack of guidance, and skill-opportunity mismatch, leading to misaligned hiring.",
+      approach: "Engineered a bidirectional intelligent matching engine utilizing NLP skill-gap extraction, semantic candidate ranking, and an accessible multilingual-friendly dashboard for both applicants and recruiters.",
+      architecture: [
+        "NLP Skill-Opportunity Semantic Matching Engine",
+        "Dynamic Skill Gap Analyzer & Learning Milestone Generator",
+        "Algorithmic Recruiter Candidate Ranking & Scorecards",
+        "Unified Recruiter Command Portal with Pipeline Filtering",
+        "Accessible, low-bandwidth UI built for first-time & rural applicants",
+        "FastAPI backend microservice with secure data modeling"
+      ],
+      solution: "Eliminated guesswork for applicants through personalized recommendations while giving recruiters precision talent rankings, streamlining large-scale national internship placements."
+    }
+  },
+  {
+    id: "estateiq-ai",
+    number: "02",
     title: "EstateIQ AI",
     category: "PropTech Valuation & AI Platform",
     domain: "ai",
@@ -34,7 +59,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "stackflow-ai",
-    number: "02",
+    number: "03",
     title: "StackFlow AI",
     category: "AI Algorithmic Engine",
     domain: "ai",
@@ -52,7 +77,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "cryptopulse-ai",
-    number: "03",
+    number: "04",
     title: "CryptoPulse AI",
     category: "Crypto Intelligence Platform",
     domain: "fintech",
@@ -70,7 +95,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "treenova",
-    number: "04",
+    number: "05",
     title: "TreeNova BST",
     category: "Educational Algorithm Tool",
     domain: "tools",
@@ -88,7 +113,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "matchmind-ai",
-    number: "05",
+    number: "06",
     title: "MatchMind AI",
     category: "AI Intelligence Platform",
     domain: "ai",
@@ -106,7 +131,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "stock-sense-ai",
-    number: "06",
+    number: "07",
     title: "Stock Sense AI",
     category: "AI Fintech Platform",
     domain: "fintech",
@@ -124,7 +149,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "ascendia-ai",
-    number: "07",
+    number: "08",
     title: "Ascendia AI",
     category: "AI Placement Assistant",
     domain: "ai",
@@ -142,7 +167,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "culina-ai",
-    number: "08",
+    number: "09",
     title: "Culina AI",
     category: "Full Stack AI App",
     domain: "ai",
@@ -160,7 +185,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "travix-ai",
-    number: "09",
+    number: "10",
     title: "Travix AI",
     category: "Generative AI Agent",
     domain: "ai",
@@ -178,7 +203,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "spectra-ai",
-    number: "10",
+    number: "11",
     title: "Spectra AI",
     category: "AI Productivity Suite",
     domain: "tools",
@@ -196,7 +221,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "ml-classifier",
-    number: "11",
+    number: "12",
     title: "ML Classifier Studio",
     category: "Interactive ML Platform",
     domain: "ai",
@@ -214,7 +239,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "earniq",
-    number: "12",
+    number: "13",
     title: "EarnIQ",
     category: "Data Science Platform",
     domain: "fintech",
@@ -232,7 +257,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "pune-traffic",
-    number: "13",
+    number: "14",
     title: "Pune Traffic Jam Predictor",
     category: "Smart City Infrastructure",
     domain: "tools",
@@ -250,7 +275,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "zentrix",
-    number: "14",
+    number: "15",
     title: "ZentriX App",
     category: "Web Application",
     domain: "tools",
@@ -268,7 +293,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "intelaris",
-    number: "15",
+    number: "16",
     title: "Intelaris",
     category: "Interactive Logic Game",
     domain: "tools",
@@ -286,7 +311,7 @@ const ALL_PROJECTS = [
   },
   {
     id: "yt-predictor",
-    number: "16",
+    number: "17",
     title: "YT Predictor",
     category: "ML Analytics Dashboard",
     domain: "ai",
@@ -319,7 +344,7 @@ const GALLERY_ITEMS = ALL_PROJECTS.map((p, idx) => ({
 
 export default function Projects() {
   const galleryRef = useRef(null);
-  const [activeProjectId, setActiveProjectId] = useState("estateiq-ai");
+  const [activeProjectId, setActiveProjectId] = useState("india-intern-ai");
   const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
 
   const activeProject = ALL_PROJECTS.find(p => p.id === activeProjectId) || ALL_PROJECTS[0];
@@ -366,7 +391,7 @@ export default function Projects() {
           </div>
           <div className="space-y-1 text-left md:text-right">
             <p className="text-xs sm:text-sm font-mono text-white/60">
-              16 PRODUCTION ENGINES, ALGORITHMS &amp; PLATFORMS
+              17 PRODUCTION ENGINES, ALGORITHMS &amp; PLATFORMS
             </p>
             <p className="text-[10px] sm:text-[11px] font-mono text-white/40">
               DRAG CYLINDER // CLICK ANY PROJECT TO LAUNCH DIRECTLY
@@ -523,7 +548,7 @@ export default function Projects() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Quick 16-Project Navigation Pills */}
+            {/* Quick 17-Project Navigation Pills */}
             <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10 flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none touch-pan-x">
               <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 mr-1 sm:mr-2 shrink-0">
                 Jump To:

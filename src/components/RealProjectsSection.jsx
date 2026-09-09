@@ -8,6 +8,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const realProjects = [
   {
+    title: "India Intern AI",
+    category: "SIH 2025 // GovTech AI Engine",
+    desc: "Smart India Hackathon 2025 Project (PS ID: 25034): An AI-driven internship recommendation engine & recruiter ranking platform for the PM Internship Scheme.",
+    link: "https://lnkd.in/dt8WygUn",
+    color: "#160f09"
+  },
+  {
     title: "EstateIQ AI",
     category: "PropTech Valuation & AI Platform",
     desc: "An intelligent PropTech platform combining Scikit-Learn ML models with Groq GenAI for instant property valuations, algorithmic ROI investment scoring, and interactive AI market intelligence.",

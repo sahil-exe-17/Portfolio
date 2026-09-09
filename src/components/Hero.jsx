@@ -111,7 +111,7 @@ export default function Hero() {
           <div className="flex items-center gap-3 pt-2 sm:pt-0 sm:pl-4 sm:border-l border-white/10 text-xs font-mono text-white/50">
             <div className="flex items-center gap-1.5">
               <Code2 size={14} className="text-[#7cff67]" />
-              <span className="text-white/80 font-bold">16+ APPS SHIPPED</span>
+              <span className="text-white/80 font-bold">17+ APPS SHIPPED</span>
             </div>
             <div className="flex items-center gap-1.5 pl-3 border-l border-white/10">
               <span className="w-2 h-2 rounded-full bg-[#7cff67] animate-ping" />
