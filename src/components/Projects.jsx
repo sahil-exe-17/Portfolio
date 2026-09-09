@@ -323,16 +323,16 @@ export default function Projects() {
   };
 
   return (
-    <section id="work" className="relative py-24 sm:py-32 px-4 sm:px-8 lg:px-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto space-y-10">
+    <section id="work" className="relative py-20 sm:py-32 px-3 sm:px-8 lg:px-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-10">
 
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 border-b border-white/10">
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
+            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
               // 03. INTERACTIVE PORTFOLIO
             </span>
-            <h2 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
+            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
               Featured <br />
               <span className="text-white">
                 Works.
@@ -343,7 +343,7 @@ export default function Projects() {
             <p className="text-xs sm:text-sm font-mono text-white/60">
               15 PRODUCTION ENGINES, ALGORITHMS &amp; PLATFORMS
             </p>
-            <p className="text-[11px] font-mono text-white/40">
+            <p className="text-[10px] sm:text-[11px] font-mono text-white/40">
               DRAG CYLINDER // CLICK ANY PROJECT TO LAUNCH DIRECTLY
             </p>
           </div>
@@ -355,19 +355,19 @@ export default function Projects() {
           speed={0.5}
           chaos={0.06}
           thickness={1.2}
-          borderRadius={40}
+          borderRadius={32}
           className="w-full"
         >
-          <div className="relative w-full rounded-[2.5rem] border border-white/15 bg-gradient-to-b from-white/[0.05] via-[#09090f]/90 to-black/95 p-5 sm:p-8 lg:p-10 overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+          <div className="relative w-full rounded-2xl sm:rounded-[2.5rem] border border-white/15 bg-gradient-to-b from-white/[0.05] via-[#09090f]/90 to-black/95 p-3.5 sm:p-8 lg:p-10 overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.8)] backdrop-blur-xl">
           
           {/* Top Bar with Mode and Navigation Buttons */}
-          <div className="flex items-center justify-between gap-4 pb-4 border-b border-white/10">
-            <div className="flex items-center gap-2 text-xs font-mono text-white/80 uppercase">
-              <span className="w-2 h-2 rounded-full bg-[#7cff67] animate-pulse" />
-              <span>3D Interactive Cylinder // Click any project card to launch live</span>
+          <div className="flex items-center justify-between gap-3 pb-3 sm:pb-4 border-b border-white/10">
+            <div className="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-white/80 uppercase truncate">
+              <span className="w-2 h-2 rounded-full bg-[#7cff67] animate-pulse shrink-0" />
+              <span className="truncate">3D Cylinder // Click card to launch</span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <button
                 onClick={() => galleryRef.current?.prev()}
                 className="p-2 sm:p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-white/80 hover:text-white transition-all hover:scale-105 active:scale-95"
@@ -387,8 +387,8 @@ export default function Projects() {
             </div>
           </div>
 
-          {/* 3D Cylinder Stage */}
-          <div className="relative h-[420px] sm:h-[480px] md:h-[540px] w-full my-2">
+          {/* 3D Cylinder Stage - Proportional on Mobile, Tablet, Laptop & Desktop */}
+          <div className="relative h-[360px] sm:h-[460px] md:h-[520px] lg:h-[560px] w-full my-2">
             <CircularGallery
               ref={galleryRef}
               items={GALLERY_ITEMS}
@@ -402,8 +402,8 @@ export default function Projects() {
             />
 
             {/* Left & Right Subtle Touch Edge Gradients */}
-            <div className="absolute inset-y-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-[#09090f] to-transparent pointer-events-none z-10 opacity-70" />
-            <div className="absolute inset-y-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-[#09090f] to-transparent pointer-events-none z-10 opacity-70" />
+            <div className="absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-[#09090f] to-transparent pointer-events-none z-10 opacity-70" />
+            <div className="absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-[#09090f] to-transparent pointer-events-none z-10 opacity-70" />
           </div>
 
           {/* Active Project Command Deck (Integrated Directly into the Circular Hover Experience) */}
@@ -418,37 +418,37 @@ export default function Projects() {
                 className="space-y-6"
               >
                 {/* Meta Header */}
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-sm font-bold tracking-widest text-white/50">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+                    <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-white/50">
                       PROJ // {activeProject.number}
                     </span>
-                    <span className="px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider bg-white/10 text-white border border-white/20">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/10 text-white border border-white/20">
                       {activeProject.category}
                     </span>
                   </div>
 
-                  <div className="px-3.5 py-1 rounded-full text-[11px] font-mono text-white/80 bg-white/[0.05] border border-white/15 flex items-center gap-1.5">
+                  <div className="inline-flex self-start sm:self-auto px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono text-white/80 bg-white/[0.05] border border-white/15 items-center gap-1.5">
                     <Sparkles size={12} className="text-[#7cff67]" />
-                    <span>{activeProject.metrics}</span>
+                    <span className="truncate">{activeProject.metrics}</span>
                   </div>
                 </div>
 
                 {/* Title & Description */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                   <div className="lg:col-span-7 space-y-3">
-                    <h3 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-none">
+                    <h3 className="font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-tight break-words">
                       {activeProject.title}
                     </h3>
-                    <p className="text-sm sm:text-base font-light text-white/80 leading-relaxed max-w-2xl">
+                    <p className="text-xs sm:text-base font-light text-white/80 leading-relaxed max-w-2xl">
                       {activeProject.desc}
                     </p>
                     {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-2 pt-2">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
                       {activeProject.tech.map((t) => (
                         <span
                           key={t}
-                          className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.06] border border-white/15 text-white/90"
+                          className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md text-[10px] sm:text-[11px] font-mono bg-white/[0.06] border border-white/15 text-white/90"
                         >
                           {t}
                         </span>
@@ -457,36 +457,36 @@ export default function Projects() {
                   </div>
 
                   {/* Direct Project Action Buttons */}
-                  <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end items-stretch lg:items-end">
+                  <div className="lg:col-span-5 flex flex-col gap-2.5 sm:gap-3 justify-end items-stretch lg:items-end w-full">
                     {activeProject.liveUrl && activeProject.liveUrl !== '#' && (
                       <a
                         href={activeProject.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-black hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_25px_rgba(255,255,255,0.4)] flex items-center justify-center gap-2 group"
+                        className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-black hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_25px_rgba(255,255,255,0.4)] flex items-center justify-center gap-2 group"
                       >
                         <span>Launch Live Application</span>
-                        <ExternalLink size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </a>
                     )}
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
                       {activeProject.githubUrl && (
                         <a
                           href={activeProject.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-5 py-3 rounded-full text-xs font-mono uppercase tracking-wider bg-white/5 hover:bg-white/15 border border-white/15 text-white transition-all flex items-center gap-2 flex-1 sm:flex-initial justify-center"
+                          className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs font-mono uppercase tracking-wider bg-white/5 hover:bg-white/15 border border-white/15 text-white transition-all flex items-center gap-2 justify-center"
                           aria-label="GitHub Repository"
                         >
-                          <Github size={15} />
+                          <Github size={14} />
                           <span>Source Code</span>
                         </a>
                       )}
 
                       <button
                         onClick={() => setSelectedCaseStudy(activeProject)}
-                        className="px-5 py-3 rounded-full text-xs font-mono text-white/80 hover:text-white bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 flex items-center gap-2 transition-all flex-1 sm:flex-initial justify-center"
+                        className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs font-mono text-white/80 hover:text-white bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 flex items-center gap-2 transition-all justify-center"
                       >
                         <span>Technical Blueprint</span>
                         <ChevronRight size={14} />
@@ -499,8 +499,8 @@ export default function Projects() {
             </AnimatePresence>
 
             {/* Quick 15-Project Navigation Pills */}
-            <div className="pt-6 mt-6 border-t border-white/10 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 mr-2 shrink-0">
+            <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10 flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none touch-pan-x">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 mr-1 sm:mr-2 shrink-0">
                 Jump To:
               </span>
               {ALL_PROJECTS.map((p) => {
@@ -509,7 +509,7 @@ export default function Projects() {
                   <button
                     key={p.id}
                     onClick={() => handleSelectProject(p.id)}
-                    className={`px-3 py-1.5 rounded-full text-[11px] font-mono tracking-wider shrink-0 transition-all duration-300 flex items-center gap-1.5 ${
+                    className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-mono tracking-wider shrink-0 transition-all duration-300 flex items-center gap-1 sm:gap-1.5 ${
                       isActive
                         ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105"
                         : "bg-white/[0.03] text-white/60 hover:text-white hover:bg-white/10 border border-white/5"

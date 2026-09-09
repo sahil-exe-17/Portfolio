@@ -26,17 +26,17 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative py-28 sm:py-36 px-6 sm:px-12 lg:px-20 overflow-hidden"
+      className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden"
     >
       {/* Horizontal Keyword Strip */}
-      <div className="w-full overflow-hidden py-4 border-y border-white/10 bg-white/[0.02] backdrop-blur-sm mb-20">
+      <div className="w-full overflow-hidden py-3 sm:py-4 border-y border-white/10 bg-white/[0.02] backdrop-blur-sm mb-12 sm:mb-20">
         <motion.div
           animate={{ x: [0, -1000] }}
           transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
-          className="flex items-center gap-8 whitespace-nowrap"
+          className="flex items-center gap-6 sm:gap-8 whitespace-nowrap"
         >
           {[...KEYWORDS, ...KEYWORDS, ...KEYWORDS].map((kw, i) => (
-            <span key={i} className="flex items-center gap-6 text-xs sm:text-sm font-mono tracking-[0.25em] text-white/50 uppercase">
+            <span key={i} className="flex items-center gap-4 sm:gap-6 text-[11px] sm:text-sm font-mono tracking-[0.25em] text-white/50 uppercase">
               <span>{kw}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
             </span>
@@ -46,12 +46,12 @@ export default function About() {
 
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-12 sm:mb-16 pb-6 border-b border-white/10">
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
+            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
               // 01. IDENTITY & PHILOSOPHY
             </span>
-            <h2 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
+            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
               Vibe-Driven <br />
               <span className="text-white">
                 Engineering.
@@ -131,17 +131,17 @@ export default function About() {
               borderRadius={24}
               className="w-full"
             >
-              <div className="glass-card p-8 rounded-3xl relative overflow-hidden group border border-white/15">
+              <div className="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden group border border-white/15">
                 <div className="flex items-center justify-between mb-6">
-                  <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10 text-white">
-                    <GraduationCap size={24} />
+                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.05] border border-white/10 text-white">
+                    <GraduationCap size={22} />
                   </div>
-                  <span className="text-xs font-mono uppercase tracking-widest text-white/70">
+                  <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-white/70">
                     ACADEMIC FOUNDATION
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-bold font-heading text-white tracking-tight mb-2">
+                <h3 className="text-xl sm:text-2xl font-bold font-heading text-white tracking-tight mb-2">
                   MIT World Peace University
                 </h3>
                 <p className="text-sm font-light text-white/70 mb-6">
@@ -149,8 +149,8 @@ export default function About() {
                   <span className="text-white/50 text-xs font-mono">Specialization: Artificial Intelligence & Data Science</span>
                 </p>
 
-                <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/10">
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-6 border-t border-white/10">
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.03] border border-white/10">
                     <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block mb-1">
                       CUMULATIVE CGPA
                     </span>
@@ -159,7 +159,7 @@ export default function About() {
                     </span>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.03] border border-white/10">
                     <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block mb-1">
                       HONORS & AWARDS
                     </span>
@@ -175,30 +175,30 @@ export default function About() {
             </ElectricBorder>
 
             {/* Direct Connect Glass Card */}
-            <div className="glass-card p-8 rounded-3xl relative border border-white/15">
-              <h4 className="text-sm font-mono uppercase tracking-widest text-white/60 mb-6 flex items-center gap-2">
+            <div className="glass-card p-6 sm:p-8 rounded-3xl relative border border-white/15">
+              <h4 className="text-xs sm:text-sm font-mono uppercase tracking-widest text-white/60 mb-6 flex items-center gap-2">
                 <Sparkles size={14} className="text-white" />
                 <span>DIRECT REACH</span>
               </h4>
 
               <div className="space-y-4 text-sm font-light text-white/80">
                 <div className="flex items-center gap-3">
-                  <MapPin size={16} className="text-white" />
-                  <span>Pune, Maharashtra, India</span>
+                  <MapPin size={16} className="text-white shrink-0" />
+                  <span className="truncate">Pune, Maharashtra, India</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Phone size={16} className="text-white" />
+                  <Phone size={16} className="text-white shrink-0" />
                   <span className="font-mono">9272557826</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Mail size={16} className="text-white" />
-                  <a href="mailto:sahillale17@gmail.com" className="hover:text-white transition-colors underline underline-offset-4">
+                  <Mail size={16} className="text-white shrink-0" />
+                  <a href="mailto:sahillale17@gmail.com" className="hover:text-white transition-colors underline underline-offset-4 truncate">
                     sahillale17@gmail.com
                   </a>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 mt-8 pt-6 border-t border-white/10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 sm:mt-8 pt-6 border-t border-white/10">
                 <a
                   href="https://linkedin.com/in/sahil-lale-199072355"
                   target="_blank"

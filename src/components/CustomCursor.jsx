@@ -22,13 +22,13 @@ export default function CustomCursor() {
   const springY = useSpring(mouseY, { stiffness: 600, damping: 35, mass: 0.2 });
 
   useEffect(() => {
-    // Detect touch / mobile
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    const handleTouchStart = () => {
       setIsTouchDevice(true);
-      return;
-    }
+      setIsVisible(false);
+    };
 
     const handleMouseMove = (e) => {
+      setIsTouchDevice(false);
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
@@ -38,6 +38,8 @@ export default function CustomCursor() {
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseDown = () => setIsClicking(true);
     const handleMouseUp = () => setIsClicking(false);
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
 
     const handleElementHover = (e) => {
       const target = e.target;
@@ -73,6 +75,7 @@ export default function CustomCursor() {
     document.addEventListener('mouseover', handleElementHover, { passive: true });
 
     return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mouseenter', handleMouseEnter);

@@ -18,7 +18,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-28 sm:py-36 px-6 sm:px-12 lg:px-20 overflow-hidden">
+    <section id="contact" className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header with Scroll Entrance */}
@@ -27,13 +27,13 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b border-white/10"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-12 sm:mb-16 pb-6 border-b border-white/10"
         >
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
+            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
               // 06. CONNECT & COLLABORATE
             </span>
-            <h2 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
+            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
               Have An Idea? <br />
               <span className="text-white">
                 Let's Build It.
@@ -46,7 +46,7 @@ export default function Contact() {
         </motion.div>
 
         {/* 2-Column Contact Interface with Scroll Animation */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           
           {/* Left Column: Direct Info & Social Badges */}
           <motion.div
@@ -54,65 +54,65 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 space-y-8"
+            className="lg:col-span-5 space-y-6 sm:space-y-8"
           >
-            <p className="text-lg sm:text-xl font-light text-white/80 leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl font-light text-white/80 leading-relaxed">
               Whether you are looking to architect intelligent autonomous agents, integrate generative AI into your product stack, or craft high-velocity digital experiences, my inbox is open.
             </p>
 
             {/* Contact Details List */}
-            <div className="glass-card p-6 sm:p-8 rounded-3xl space-y-5 border border-white/15">
+            <div className="glass-card p-5 sm:p-8 rounded-3xl space-y-4 sm:space-y-5 border border-white/15">
               <a
                 href="mailto:sahillale17@gmail.com"
-                className="flex items-center gap-4 group text-white/80 hover:text-white transition-colors"
+                className="flex items-center gap-3 sm:gap-4 group text-white/80 hover:text-white transition-colors"
               >
-                <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10 group-hover:border-white/40 transition-colors">
-                  <Mail size={20} className="text-white" />
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.05] border border-white/10 group-hover:border-white/40 transition-colors shrink-0">
+                  <Mail size={18} className="text-white" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider block">EMAIL</span>
-                  <span className="text-sm sm:text-base font-mono font-medium text-white">sahillale17@gmail.com</span>
+                  <span className="text-xs sm:text-base font-mono font-medium text-white truncate block">sahillale17@gmail.com</span>
                 </div>
               </a>
 
               <a
                 href="tel:9272557826"
-                className="flex items-center gap-4 group text-white/80 hover:text-white transition-colors"
+                className="flex items-center gap-3 sm:gap-4 group text-white/80 hover:text-white transition-colors"
               >
-                <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10 group-hover:border-white/40 transition-colors">
-                  <Phone size={20} className="text-white" />
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.05] border border-white/10 group-hover:border-white/40 transition-colors shrink-0">
+                  <Phone size={18} className="text-white" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider block">PHONE</span>
-                  <span className="text-sm sm:text-base font-mono font-medium text-white">+91 9272557826</span>
+                  <span className="text-xs sm:text-base font-mono font-medium text-white block">+91 9272557826</span>
                 </div>
               </a>
 
-              <div className="flex items-center gap-4 text-white/80">
-                <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10">
-                  <MapPin size={20} className="text-white" />
+              <div className="flex items-center gap-3 sm:gap-4 text-white/80">
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.05] border border-white/10 shrink-0">
+                  <MapPin size={18} className="text-white" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider block">LOCATION</span>
-                  <span className="text-sm sm:text-base font-medium text-white">Pune, Maharashtra, India</span>
+                  <span className="text-xs sm:text-base font-medium text-white block">Pune, Maharashtra, India</span>
                 </div>
               </div>
             </div>
 
             {/* Social Connect Badges */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <motion.a
                 whileHover={{ y: -4, scale: 1.03 }}
                 href="https://linkedin.com/in/sahil-lale-199072355"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card p-5 rounded-2xl border border-white/10 hover:border-white/40 flex items-center justify-between group transition-all shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+                className="glass-card p-4 sm:p-5 rounded-2xl border border-white/10 hover:border-white/40 flex items-center justify-between group transition-all shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
               >
                 <div className="flex items-center gap-3">
-                  <FaLinkedin size={20} className="text-white group-hover:scale-110 transition-transform" />
+                  <FaLinkedin size={18} className="text-white group-hover:scale-110 transition-transform" />
                   <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white">LinkedIn</span>
                 </div>
-                <ArrowUpRight size={16} className="text-white/40 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight size={15} className="text-white/40 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </motion.a>
 
               <motion.a
@@ -120,13 +120,13 @@ export default function Contact() {
                 href="https://github.com/sahil-exe-17"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card p-5 rounded-2xl border border-white/10 hover:border-white/40 flex items-center justify-between group transition-all shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+                className="glass-card p-4 sm:p-5 rounded-2xl border border-white/10 hover:border-white/40 flex items-center justify-between group transition-all shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
               >
                 <div className="flex items-center gap-3">
-                  <FaGithub size={20} className="text-white group-hover:scale-110 transition-transform" />
+                  <FaGithub size={18} className="text-white group-hover:scale-110 transition-transform" />
                   <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white">GitHub</span>
                 </div>
-                <ArrowUpRight size={16} className="text-white/40 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight size={15} className="text-white/40 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </motion.a>
             </div>
 
@@ -148,17 +148,17 @@ export default function Contact() {
               borderRadius={24}
               className="w-full"
             >
-              <div className="glass-card p-8 sm:p-12 rounded-3xl border border-white/20 relative shadow-[0_25px_80px_rgba(0,0,0,0.8)]">
-              <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-2">
+              <div className="glass-card p-5 sm:p-8 lg:p-12 rounded-3xl border border-white/20 relative shadow-[0_25px_80px_rgba(0,0,0,0.8)]">
+              <h3 className="font-heading text-xl sm:text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-2">
                 <span>Send A Direct Message</span>
                 <Sparkles size={18} className="text-white" />
               </h3>
-              <p className="text-xs font-mono text-white/40 mb-8 uppercase tracking-wider">
+              <p className="text-[10px] sm:text-xs font-mono text-white/40 mb-6 sm:mb-8 uppercase tracking-wider">
                 TRANSMIT INQUIRIES // IMMEDIATE NOTIFICATION
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-mono uppercase tracking-widest text-white/70 block">
                       YOUR NAME

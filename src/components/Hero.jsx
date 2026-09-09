@@ -36,7 +36,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full flex flex-col justify-between pt-32 pb-16 px-6 sm:px-12 lg:px-20 overflow-hidden"
+      className="relative min-h-screen w-full flex flex-col justify-between pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-8 lg:px-20 overflow-hidden"
     >
       {/* 100% Stable Content Container - No screen wobbling */}
       <div className="relative z-10 max-w-6xl w-full mx-auto flex-1 flex flex-col justify-center">
@@ -46,16 +46,16 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-wrap items-center gap-3 mb-6"
+          className="flex flex-wrap items-center gap-2 sm:gap-3 mb-6"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-white/15 text-xs font-mono tracking-wider text-white">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-white/15 text-[11px] sm:text-xs font-mono tracking-wider text-white">
             <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
             <span className="font-semibold text-white">SAHIL LALE</span>
             <span className="text-white/40">//</span>
             <span className="text-white/80">AI DEVELOPER</span>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-xs font-mono text-white/60">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-[11px] sm:text-xs font-mono text-white/60">
             <span>MIT-WPU (8.9 CGPA)</span>
           </div>
         </motion.div>
@@ -66,7 +66,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-extrabold uppercase tracking-tight text-white leading-[0.95]"
+            className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-[5rem] font-extrabold uppercase tracking-tight text-white leading-[0.98] break-words"
           >
             Turning AI Into <br />
             <span className="text-white">
@@ -80,7 +80,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl font-light leading-snug pt-2"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/80 max-w-2xl font-light leading-snug pt-2"
           >
             Building intelligent applications that bridge deep learning with human-centric design. Fast, disciplined, and production-ready.
           </motion.p>
@@ -91,11 +91,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-8 flex flex-wrap items-center gap-4"
+          className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
         >
           <a
             href="#work"
-            className="px-7 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm text-black bg-white hover:bg-white/90 active:scale-95 transition-all flex items-center gap-2 shadow-[0_0_25px_rgba(255,255,255,0.3)]"
+            className="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm text-black bg-white hover:bg-white/90 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(255,255,255,0.3)]"
           >
             <span>Explore Projects</span>
             <ArrowUpRight size={16} />
@@ -103,12 +103,12 @@ export default function Hero() {
 
           <a
             href="#contact"
-            className="px-7 py-3.5 rounded-full font-semibold uppercase tracking-wider text-xs sm:text-sm text-white bg-white/[0.05] border border-white/20 hover:bg-white/[0.1] active:scale-95 transition-all"
+            className="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-semibold uppercase tracking-wider text-xs sm:text-sm text-white bg-white/[0.05] border border-white/20 hover:bg-white/[0.1] active:scale-95 transition-all text-center"
           >
             <span>Get In Touch</span>
           </a>
 
-          <div className="hidden sm:flex items-center gap-4 pl-4 border-l border-white/10 text-xs font-mono text-white/50">
+          <div className="flex items-center gap-3 pt-2 sm:pt-0 sm:pl-4 sm:border-l border-white/10 text-xs font-mono text-white/50">
             <div className="flex items-center gap-1.5">
               <Code2 size={14} className="text-[#7cff67]" />
               <span className="text-white/80 font-bold">15+ APPS SHIPPED</span>
@@ -120,17 +120,17 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Crazy Cyber Tech Pills */}
+        {/* Cyber Tech Pills */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-8 flex flex-wrap gap-2 pt-4"
+          className="mt-6 sm:mt-8 flex flex-wrap gap-1.5 sm:gap-2 pt-2 sm:pt-4"
         >
-          {['⚡ GROQ AI 50ms', '🧠 PYTORCH & GEMINI', '⚛ REACT 19 & NEXT.JS', '🔮 3D WEBGL CYLINDER', '🚀 100% VIBECODED'].map((badge, idx) => (
+          {['⚡ GROQ AI 50ms', '🧠 PYTORCH & GEMINI', '⚛ REACT 19 & NEXT.JS', '🔮 3D WEBGL CYLINDER', '🚀 100% VIBECODED'].map((badge) => (
             <span
               key={badge}
-              className="px-3 py-1 rounded-full text-[11px] font-mono tracking-wider bg-white/[0.04] border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-all hover:scale-105 select-none cursor-default"
+              className="px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono tracking-wider bg-white/[0.04] border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-all hover:scale-105 select-none cursor-default"
             >
               {badge}
             </span>
@@ -139,7 +139,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom Stable Indicator */}
-      <div className="relative z-10 max-w-6xl w-full mx-auto pt-8 flex items-center justify-between border-t border-white/10 text-xs font-mono text-white/40">
+      <div className="relative z-10 max-w-6xl w-full mx-auto pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10 text-[11px] sm:text-xs font-mono text-white/40 text-center sm:text-left">
         <span>PUNE, MAHARASHTRA // AVAILABLE FOR WORK</span>
 
         <a

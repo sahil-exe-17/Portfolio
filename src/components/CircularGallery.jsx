@@ -535,16 +535,24 @@ class Media {
 
     const H = this.viewport.width / 2;
 
-    if (this.bend === 0) {
+    // Responsive bend: steep curve looks great on wide desktop, but on mobile/tablets
+    // a gentler curvature keeps cards facing the camera and prevents edge-clipping
+    const isMobile = this.screen.width < 640;
+    const isTablet = this.screen.width >= 640 && this.screen.width < 1024;
+    const effectiveBend = isMobile 
+      ? Math.min(this.bend, 1.2) 
+      : (isTablet ? Math.min(this.bend, 2.0) : this.bend);
+
+    if (effectiveBend === 0) {
       this.plane.position.y = 0;
       this.plane.rotation.z = 0;
     } else {
-      const B_abs = Math.abs(this.bend);
+      const B_abs = Math.abs(effectiveBend);
       const R = (H * H + B_abs * B_abs) / (2 * B_abs);
       const effectiveX = Math.min(Math.abs(x), H);
 
       const arc = R - Math.sqrt(Math.max(0, R * R - effectiveX * effectiveX));
-      if (this.bend > 0) {
+      if (effectiveBend > 0) {
         this.plane.position.y = -arc;
         this.plane.rotation.z = -Math.sign(x) * Math.asin(Math.min(0.999, effectiveX / R));
       } else {
@@ -565,11 +573,28 @@ class Media {
         this.plane.program.uniforms.uViewportSizes.value = [this.viewport.width, this.viewport.height];
       }
     }
-    this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    
+    // Cross-device responsive card sizing for Mobile, Tablet, Laptop, and Ultrawide PC
+    const isMobile = this.screen.width < 640;
+    const isTablet = this.screen.width >= 640 && this.screen.width < 1024;
+
+    // Height ratio calibrated per device category
+    const cardHeightFraction = isMobile ? 0.68 : (isTablet ? 0.62 : 0.58);
+    this.plane.scale.y = this.viewport.height * cardHeightFraction;
+
+    // Lock card aspect ratio to 700 / 920 (~0.76) so cards are never squished or stretched
+    this.plane.scale.x = this.plane.scale.y * (700 / 920);
+
+    // On narrow phone viewports, cap card width so it never overflows screen bounds
+    if (this.plane.scale.x > this.viewport.width * 0.82) {
+      this.plane.scale.x = this.viewport.width * 0.82;
+      this.plane.scale.y = this.plane.scale.x * (920 / 700);
+    }
+
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
-    this.padding = 1.5;
+    
+    // Responsive padding between cards
+    this.padding = isMobile ? 0.5 : (isTablet ? 0.9 : 1.4);
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
@@ -694,11 +719,33 @@ class App {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
     this.start = e.touches ? e.touches[0].clientX : e.clientX;
+    this.startY = e.touches ? e.touches[0].clientY : e.clientY;
     this.startTime = Date.now();
+    this.isSwipeDetermined = false;
+    this.isScrollingVertical = false;
   }
   onTouchMove(e) {
     if (!this.isDown) return;
     const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+    if (e.touches) {
+      if (this.isScrollingVertical) return;
+
+      const dx = Math.abs(x - this.start);
+      const dy = Math.abs(y - (this.startY || y));
+
+      if (!this.isSwipeDetermined && (dx > 6 || dy > 6)) {
+        this.isSwipeDetermined = true;
+        if (dy > dx * 1.15) {
+          // Dominant vertical gesture: allow native page scroll
+          this.isScrollingVertical = true;
+          this.isDown = false;
+          return;
+        }
+      }
+    }
+
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
     this.scroll.target = this.scroll.position + distance;
   }

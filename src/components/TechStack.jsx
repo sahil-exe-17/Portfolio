@@ -69,6 +69,24 @@ export default function TechStack() {
       if (closest) setActiveTech(closest);
     };
 
+    const handleCanvasTouch = (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.touches[0].clientX - rect.left;
+      mouse.y = e.touches[0].clientY - rect.top;
+
+      let closest = null;
+      let minDist = 80;
+      nodes.forEach((node) => {
+        const dist = Math.hypot(node.currentX - mouse.x, node.currentY - mouse.y);
+        if (dist < minDist) {
+          minDist = dist;
+          closest = node;
+        }
+      });
+      if (closest) setActiveTech(closest);
+    };
+
     let isIntersecting = true;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -148,16 +166,22 @@ export default function TechStack() {
 
     animId = requestAnimationFrame(render);
 
+    canvas.addEventListener('mousemove', handleCanvasMouseMove, { passive: true });
+    canvas.addEventListener('touchstart', handleCanvasTouch, { passive: true });
+    canvas.addEventListener('touchmove', handleCanvasTouch, { passive: true });
+
     return () => {
       cancelAnimationFrame(animId);
       observer.disconnect();
       window.removeEventListener('resize', handleResize);
       canvas.removeEventListener('mousemove', handleCanvasMouseMove);
+      canvas.removeEventListener('touchstart', handleCanvasTouch);
+      canvas.removeEventListener('touchmove', handleCanvasTouch);
     };
   }, [activeTech]);
 
   return (
-    <section id="stack" className="relative py-28 sm:py-36 px-6 sm:px-12 lg:px-20 overflow-hidden">
+    <section id="stack" className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header with Scroll Entrance */}
@@ -166,18 +190,18 @@ export default function TechStack() {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b border-white/10"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-12 sm:mb-16 pb-6 border-b border-white/10"
         >
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
+            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
               // 05. INTERACTIVE CONSTELLATION
             </span>
-            <h2 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
+            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
               Tech <span className="text-white">Stack.</span>
             </h2>
           </div>
           <p className="text-xs sm:text-sm font-mono text-white/40 max-w-xs text-left md:text-right">
-            HOVER OVER NODES TO EXPLORE ARCHITECTURAL ROLES IN PRODUCTION.
+            HOVER OR TAP NODES TO EXPLORE ARCHITECTURAL ROLES IN PRODUCTION.
           </p>
         </motion.div>
 
@@ -187,16 +211,36 @@ export default function TechStack() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start"
         >
           {/* Interactive Canvas Area */}
-          <div className="lg:col-span-8 h-[480px] sm:h-[540px] rounded-3xl glass-card relative overflow-hidden border border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.7)]">
-            <div className="absolute top-4 left-6 z-10 flex items-center gap-2 text-xs font-mono text-white/50">
-              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-              <span>LIVE ORBITAL TOPOLOGY</span>
+          <div className="lg:col-span-8 flex flex-col gap-3">
+            <div className="h-[320px] sm:h-[440px] lg:h-[520px] rounded-3xl glass-card relative overflow-hidden border border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.7)]">
+              <div className="absolute top-4 left-6 z-10 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-white/50">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                <span>LIVE ORBITAL TOPOLOGY</span>
+              </div>
+              
+              <canvas ref={canvasRef} className="w-full h-full cursor-crosshair touch-none" />
             </div>
-            
-            <canvas ref={canvasRef} className="w-full h-full cursor-crosshair" />
+
+            {/* Quick-Select Tech Chips for Finger / Mobile Touch */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-none pt-1">
+              <span className="text-[10px] font-mono uppercase text-white/40 mr-1 shrink-0">SELECT:</span>
+              {CONSTELLATION_TECH.map((t) => (
+                <button
+                  key={t.name}
+                  onClick={() => setActiveTech(t)}
+                  className={`px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-mono shrink-0 transition-all ${
+                    activeTech?.name === t.name
+                      ? "bg-white text-black font-bold shadow-[0_0_12px_rgba(255,255,255,0.4)]"
+                      : "bg-white/[0.04] text-white/60 hover:text-white border border-white/10"
+                  }`}
+                >
+                  {t.name}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Technology HUD Detail Panel */}
@@ -209,21 +253,21 @@ export default function TechStack() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
                   transition={{ duration: 0.3 }}
-                  className="glass-card p-8 rounded-3xl border border-white/20 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                  className="glass-card p-6 sm:p-8 rounded-3xl border border-white/20 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
                 >
-                  <span className="text-xs font-mono uppercase tracking-widest text-white/60 block mb-2">
+                  <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-white/60 block mb-2">
                     {activeTech.category}
                   </span>
 
-                  <h3 className="font-heading text-3xl font-bold text-white tracking-tight mb-4">
+                  <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white tracking-tight mb-3 sm:mb-4">
                     {activeTech.name}
                   </h3>
 
-                  <p className="text-sm font-light text-white/70 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm font-light text-white/70 leading-relaxed mb-6">
                     {activeTech.role}
                   </p>
 
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/40">
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] sm:text-xs font-mono text-white/40">
                     <span>STATUS</span>
                     <span className="text-white font-medium">PRODUCTION READY</span>
                   </div>

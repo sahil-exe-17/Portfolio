@@ -84,7 +84,7 @@ export default function Skills() {
   const [activeDomain, setActiveDomain] = useState(SKILL_DOMAINS[0].id);
 
   return (
-    <section id="skills" className="relative py-28 sm:py-36 px-6 sm:px-12 lg:px-20 overflow-hidden">
+    <section id="skills" className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header with Scroll Entrance */}
@@ -93,13 +93,13 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b border-white/10"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-12 sm:mb-16 pb-6 border-b border-white/10"
         >
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
+            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
               // 02. CAPABILITIES & ARSENAL
             </span>
-            <h2 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
+            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
               What I <span className="text-white">Build.</span>
             </h2>
           </div>
@@ -109,7 +109,7 @@ export default function Skills() {
         </motion.div>
 
         {/* 4 Large Interactive Glass Panels with Staggered Scroll Triggers */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
           {SKILL_DOMAINS.map((domain, i) => {
             const isSelected = activeDomain === domain.id;
             return (
@@ -120,8 +120,9 @@ export default function Skills() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, delay: i * 0.12 }}
                 onMouseEnter={() => setActiveDomain(domain.id)}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className={`relative p-8 sm:p-10 rounded-3xl glass-card cursor-pointer overflow-hidden transition-all duration-500 border ${
+                onClick={() => setActiveDomain(domain.id)}
+                whileHover={{ y: -6, scale: 1.01 }}
+                className={`relative p-6 sm:p-10 rounded-3xl glass-card cursor-pointer overflow-hidden transition-all duration-500 border ${
                   isSelected 
                     ? 'border-white/40 bg-white/[0.06] shadow-[0_25px_60px_rgba(0,0,0,0.85)]' 
                     : 'border-white/10 bg-white/[0.02] hover:border-white/30'

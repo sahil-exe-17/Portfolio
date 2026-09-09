@@ -48,7 +48,7 @@ export default function Journey() {
   const scaleY = useSpring(scrollYProgress, { stiffness: 150, damping: 25 });
 
   return (
-    <section id="journey" ref={containerRef} className="relative py-28 sm:py-36 px-6 sm:px-12 lg:px-20 overflow-hidden">
+    <section id="journey" ref={containerRef} className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header with Scroll Entrance */}
@@ -57,13 +57,13 @@ export default function Journey() {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20 pb-6 border-b border-white/10"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-16 sm:mb-20 pb-6 border-b border-white/10"
         >
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
+            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
               // 04. EXPERIENCE & MILESTONES
             </span>
-            <h2 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
+            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
               The <span className="text-white">Journey.</span>
             </h2>
           </div>
@@ -75,15 +75,15 @@ export default function Journey() {
         {/* Vertical Timeline with Scroll Progress Drawing */}
         <div className="relative max-w-4xl mx-auto">
           {/* Timeline Background Track */}
-          <div className="absolute top-4 bottom-4 left-6 md:left-1/2 -translate-x-1/2 w-[2px] bg-white/10" />
+          <div className="absolute top-4 bottom-4 left-5 md:left-1/2 -translate-x-1/2 w-[2px] bg-white/10" />
 
           {/* Glowing Animated Progress Line */}
           <motion.div
             style={{ scaleY, originY: 0 }}
-            className="absolute top-4 bottom-4 left-6 md:left-1/2 -translate-x-1/2 w-[2px] bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] z-0"
+            className="absolute top-4 bottom-4 left-5 md:left-1/2 -translate-x-1/2 w-[2px] bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] z-0"
           />
 
-          <div className="space-y-12 sm:space-y-16">
+          <div className="space-y-10 sm:space-y-16">
             {MILESTONES.map((item, idx) => {
               const isEven = idx % 2 === 0;
               return (
@@ -93,20 +93,20 @@ export default function Journey() {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.7, delay: idx * 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${
+                  className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 sm:gap-8 ${
                     isEven ? "md:flex-row-reverse" : ""
                   }`}
                 >
                   {/* Center Node Marker */}
-                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full glass-pill bg-[#0c0c10] border border-white/20 flex items-center justify-center z-10 shadow-[0_0_25px_rgba(0,0,0,0.9)] hover:scale-110 transition-transform">
+                  <div className="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-pill bg-[#0c0c10] border border-white/20 flex items-center justify-center z-10 shadow-[0_0_25px_rgba(0,0,0,0.9)] hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
 
                   {/* Content Card */}
-                  <div className={`w-full md:w-1/2 pl-16 md:pl-0 ${isEven ? "md:pl-12 text-left" : "md:pr-12 md:text-right"}`}>
+                  <div className={`w-full md:w-1/2 pl-12 sm:pl-16 md:pl-0 ${isEven ? "md:pl-12 text-left" : "md:pr-12 md:text-right"}`}>
                     <motion.div
                       whileHover={{ y: -6, scale: 1.02 }}
-                      className="glass-card p-7 sm:p-8 rounded-3xl border border-white/15 hover:border-white/40 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
+                      className="glass-card p-5 sm:p-8 rounded-3xl border border-white/15 hover:border-white/40 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
                     >
                       <div className={`flex flex-wrap items-center gap-2 mb-3 ${isEven ? "justify-start" : "md:justify-end"}`}>
                         <span className="text-xs font-mono px-3 py-1 rounded-full uppercase tracking-wider bg-white/[0.05] border border-white/10 text-white/80">
