@@ -67,7 +67,7 @@ const realProjects = [
     title: "Ascendia AI",
     category: "AI Placement Assistant",
     desc: "A full-stack AI-powered placement assistant with resume analyzer, interactive mock interview system, and personalized roadmap generator.",
-    link: "https://ascendiaai.netlify.app/",
+    link: "https://ascendia-ai.netlify.app/",
     color: "#222222"
   },
   {

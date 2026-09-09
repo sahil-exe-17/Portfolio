@@ -53,7 +53,7 @@ const projects = [
     label: "Career",
     description: "Placement assistant with resume scoring and mock interviews.",
     tech: ["React", "FastAPI", "Gemini"],
-    link: "https://ascendiaai.netlify.app/"
+    link: "https://ascendia-ai.netlify.app/"
   },
   {
     title: "ML Classifier",

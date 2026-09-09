@@ -121,7 +121,7 @@ const ALL_PROJECTS = [
     domain: "ai",
     desc: "A full-stack AI-powered placement assistant with resume analyzer (ATS scoring), interactive mock interview system, and personalized roadmap generator.",
     tech: ["React", "FastAPI", "Gemini API", "Tailwind CSS", "Python"],
-    liveUrl: "https://ascendiaai.netlify.app/",
+    liveUrl: "https://ascendia-ai.netlify.app/",
     githubUrl: "https://github.com/sahil-exe-17",
     metrics: "ATS Scoring Engine // Gemini Mock Agent",
     caseStudy: {
