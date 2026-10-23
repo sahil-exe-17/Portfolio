@@ -1,172 +1,161 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Brain, Cpu, Sparkles, Layers, ArrowUpRight, Terminal, Network, ShieldCheck } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Terminal, Layout, Cpu, Database, Sparkles, Layers, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import { 
   SiPython, SiCplusplus, SiC, SiPandas, SiNumpy, SiScikitlearn, 
-  SiTensorflow, SiPytorch, SiKeras, SiOpencv, SiOpenai, SiHuggingface,
-  SiReact, SiFastapi, SiTailwindcss, SiGit, SiPostman, SiStreamlit, SiFirebase
+  SiPytorch, SiReact, SiFastapi, SiTailwindcss, SiGit, SiPostman, SiJavascript
 } from 'react-icons/si';
 
-const SKILL_DOMAINS = [
+const SKILL_CATEGORIES = [
   {
-    id: "gen-ai",
-    number: "01",
-    title: "Generative AI & Agents",
-    tagline: "Autonomous Reasoning & Large Language Model Ecosystems",
-    desc: "Designing and deploying production-ready AI agents, retrieval-augmented generation (RAG) pipelines, and multimodal LLM integrations with real-time streaming.",
-    icon: <Brain className="text-white" size={28} />,
+    id: "languages",
+    title: "Programming Languages & Systems",
+    tagline: "Deterministic Execution & Algorithmic Foundations",
     skills: [
-      { name: "OpenAI API", icon: <SiOpenai /> },
-      { name: "Google Gemini", icon: <Sparkles /> },
-      { name: "Hugging Face", icon: <SiHuggingface /> },
-      { name: "RAG Systems", icon: <Layers /> },
-      { name: "LLM Fine-Tuning", icon: <Brain /> },
-      { name: "Prompt Engineering", icon: <Terminal /> },
-      { name: "Multi-Agent AI", icon: <Network /> },
-      { name: "Vibecoding", icon: <Sparkles /> },
+      { name: "Python", icon: <SiPython />, level: "Expert", desc: "Primary language for models, numerical computation & async backends." },
+      { name: "C++", icon: <SiCplusplus />, level: "Advanced", desc: "Data structures, memory optimization & algorithmic complexity." },
+      { name: "C", icon: <SiC />, level: "Proficient", desc: "Low-level system concepts and pointer architectures." },
+      { name: "JavaScript (ES6+)", icon: <SiJavascript />, level: "Advanced", desc: "Modern reactive asynchronous event loop orchestration." },
+      { name: "TypeScript", icon: <SiReact />, level: "Advanced", desc: "Type-safe interfaces and rigorous client-server contracts." }
     ]
   },
   {
-    id: "ml-dl",
-    number: "02",
-    title: "Deep Learning & ML",
-    tagline: "Predictive Analytics, Computer Vision & Statistical Modeling",
-    desc: "End-to-end model training, feature engineering, computer vision processing, and deployment of predictive ensemble architectures.",
-    icon: <Cpu className="text-white" size={28} />,
+    id: "web-frontend",
+    title: "Modern Web Engineering",
+    tagline: "High-FPS Reactive Architecture & Fluid Layouts",
     skills: [
-      { name: "Python", icon: <SiPython /> },
-      { name: "PyTorch", icon: <SiPytorch /> },
-      { name: "TensorFlow", icon: <SiTensorflow /> },
-      { name: "Scikit-Learn", icon: <SiScikitlearn /> },
-      { name: "Keras", icon: <SiKeras /> },
-      { name: "OpenCV", icon: <SiOpencv /> },
-      { name: "NumPy", icon: <SiNumpy /> },
-      { name: "Pandas", icon: <SiPandas /> },
+      { name: "React 19", icon: <SiReact />, level: "Advanced", desc: "Concurrent rendering, server actions & custom component hooks." },
+      { name: "Tailwind CSS", icon: <SiTailwindcss />, level: "Expert", desc: "Utility-first design tokens, responsive breakpoints & micro-styling." },
+      { name: "Framer Motion", icon: <Sparkles size={14} />, level: "Advanced", desc: "Physics-based spring curves, layout morphs & kinetic typography." },
+      { name: "GSAP / ScrollTrigger", icon: <Layers size={14} />, level: "Advanced", desc: "Timeline orchestration, pin spacers & smooth scroll transitions." },
+      { name: "Web Audio API", icon: <Cpu size={14} />, level: "Proficient", desc: "Client-side harmonic frequency synthesis (TreeNova)." }
     ]
   },
   {
-    id: "frontend",
-    number: "03",
-    title: "Creative Frontend & UI",
-    tagline: "Cinematic, High-Performance Interactive Web Interfaces",
-    desc: "Crafting fluid, high-fps web applications with React 19, custom WebGL / Three.js canvas shaders, Tailwind CSS v4, and reactive state orchestration.",
-    icon: <Sparkles className="text-white" size={28} />,
+    id: "backend-data",
+    title: "Backend, ML & Data Engineering",
+    tagline: "Microservices, Machine Learning & Mathematical Modeling",
     skills: [
-      { name: "React 19", icon: <SiReact /> },
-      { name: "Tailwind CSS v4", icon: <SiTailwindcss /> },
-      { name: "Framer Motion", icon: <Sparkles /> },
-      { name: "Three.js / WebGL", icon: <Layers /> },
-      { name: "Web Audio API", icon: <Cpu /> },
-      { name: "Zustand State", icon: <Layers /> },
-      { name: "Responsive UI", icon: <ShieldCheck /> },
+      { name: "FastAPI", icon: <SiFastapi />, level: "Advanced", desc: "High-throughput asynchronous Python endpoints with strict Pydantic models." },
+      { name: "Scikit-Learn", icon: <SiScikitlearn />, level: "Advanced", desc: "Regression valuation, decision trees, random forests & clustering." },
+      { name: "NumPy & Pandas", icon: <SiPandas />, level: "Advanced", desc: "High-performance vector operations and multidimensional data matrices." },
+      { name: "PyTorch", icon: <SiPytorch />, level: "Proficient", desc: "Tensor operations and neural architecture experimentation." },
+      { name: "XGBoost", icon: <Cpu size={14} />, level: "Advanced", desc: "Gradient boosting algorithms for predictive analytics (EarnIQ)." }
     ]
   },
   {
-    id: "backend-infra",
-    number: "04",
-    title: "Backend, APIs & Cloud",
-    tagline: "Scalable Microservices, Real-time Protocols & Cloud Pipelines",
-    desc: "Constructing high-throughput REST APIs, serverless computing functions, Firebase real-time datastores, and full CI/CD deployment pipelines.",
-    icon: <Terminal className="text-white" size={28} />,
+    id: "devops-tooling",
+    title: "Tooling, Architecture & DevOps",
+    tagline: "Reproducible Pipelines, Testing & Version Control",
     skills: [
-      { name: "FastAPI", icon: <SiFastapi /> },
-      { name: "C / C++", icon: <SiCplusplus /> },
-      { name: "Streamlit", icon: <SiStreamlit /> },
-      { name: "Firebase", icon: <SiFirebase /> },
-      { name: "RESTful APIs", icon: <Network /> },
-      { name: "Postman", icon: <SiPostman /> },
-      { name: "Git & Versioning", icon: <SiGit /> },
+      { name: "Git & GitHub", icon: <SiGit />, level: "Expert", desc: "Branching workflows, code reviews and distributed version control." },
+      { name: "Postman API", icon: <SiPostman />, level: "Advanced", desc: "Endpoint validation, payload testing & contract verification." },
+      { name: "Vercel & Netlify", icon: <Layers size={14} />, level: "Advanced", desc: "Edge deployment, environment configuration & automated CI/CD." },
+      { name: "Linux & Bash", icon: <Terminal size={14} />, level: "Advanced", desc: "Command-line operations, process monitoring & shell scripting." }
     ]
   }
 ];
 
 export default function Skills() {
-  const [activeDomain, setActiveDomain] = useState(SKILL_DOMAINS[0].id);
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <section id="skills" className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Section Header with Scroll Entrance */}
-        <motion.div
-          initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-12 sm:mb-16 pb-6 border-b border-white/10"
-        >
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 sm:mb-16 pb-6 border-b border-[#292524]/08">
           <div>
-            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
-              // 02. CAPABILITIES & ARSENAL
+            <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#78716C] block mb-2">
+              // 03. TECHNICAL CAPABILITIES
             </span>
-            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
-              What I <span className="text-white">Build.</span>
+            <h2 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1C1917] uppercase leading-[0.96]">
+              Competencies <br />
+              <span className="editorial-serif lowercase font-normal text-[#57534E]">
+                & engineering
+              </span>{' '}
+              Toolkit.
             </h2>
           </div>
-          <p className="text-xs sm:text-sm font-mono text-white/40 max-w-xs text-left md:text-right">
-            DISCIPLINED EXECUTION ACROSS MACHINE INTELLIGENCE AND MODERN WEB SYSTEMS.
-          </p>
-        </motion.div>
 
-        {/* 4 Large Interactive Glass Panels with Staggered Scroll Triggers */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
-          {SKILL_DOMAINS.map((domain, i) => {
-            const isSelected = activeDomain === domain.id;
-            return (
-              <motion.div
-                key={domain.id}
-                initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: i * 0.12 }}
-                onMouseEnter={() => setActiveDomain(domain.id)}
-                onClick={() => setActiveDomain(domain.id)}
-                whileHover={{ y: -6, scale: 1.01 }}
-                className={`relative p-6 sm:p-10 rounded-3xl glass-card cursor-pointer overflow-hidden transition-all duration-500 border ${
-                  isSelected 
-                    ? 'border-white/40 bg-white/[0.06] shadow-[0_25px_60px_rgba(0,0,0,0.85)]' 
-                    : 'border-white/10 bg-white/[0.02] hover:border-white/30'
+          {/* Interactive Category Selector Pills */}
+          <div className="flex flex-wrap gap-1.5 p-1 rounded-full bg-[#292524]/04 border border-[#292524]/08 max-w-xl">
+            {SKILL_CATEGORIES.map((cat, idx) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveTab(idx)}
+                className={`px-3 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all ${
+                  activeTab === idx
+                    ? 'bg-[#1C1917] text-[#FAFAF8] shadow-[0_2px_10px_rgba(28,25,23,0.15)] font-semibold'
+                    : 'text-[#57534E] hover:text-[#1C1917]'
                 }`}
               >
-                {/* Header with Number and Icon */}
-                <div className="flex items-center justify-between mb-8">
-                  <div className="flex items-center gap-4">
-                    <span className="text-xs font-mono text-white/40">{domain.number}</span>
-                    <div className="p-3 rounded-2xl bg-white/[0.06] border border-white/10">
-                      {domain.icon}
+                0{idx + 1}. {cat.title.split(' ')[0]}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Active Domain Stage */}
+        <div className="bg-white/80 rounded-3xl p-6 sm:p-10 border border-[#292524]/10 shadow-[0_8px_30px_rgba(41,37,36,0.04)]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#292524]/08 gap-2">
+            <div>
+              <span className="text-xs font-mono text-[#78716C] uppercase tracking-widest">
+                [SECTOR 0{activeTab + 1}]
+              </span>
+              <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[#1C1917] mt-1">
+                {SKILL_CATEGORIES[activeTab].title}
+              </h3>
+            </div>
+            <p className="text-xs font-mono text-[#57534E] max-w-sm sm:text-right">
+              {SKILL_CATEGORIES[activeTab].tagline}
+            </p>
+          </div>
+
+          {/* Crazy Animated Skill Cards Grid */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-6"
+            >
+              {SKILL_CATEGORIES[activeTab].skills.map((skill, index) => (
+                <motion.div
+                  key={skill.name}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="p-5 rounded-2xl bg-white/90 border border-[#292524]/08 shadow-[0_2px_12px_rgba(41,37,36,0.02)] hover:border-[#292524]/25 hover:shadow-[0_8px_24px_rgba(41,37,36,0.06)] flex flex-col justify-between group transition-all"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="p-2.5 rounded-xl bg-[#292524]/04 text-lg text-[#1C1917] group-hover:bg-[#1C1917] group-hover:text-[#FAFAF8] transition-colors">
+                        {skill.icon}
+                      </div>
+                      <span className="text-[10px] font-mono tracking-widest uppercase px-2 py-0.5 rounded-md bg-[#292524]/05 text-[#57534E]">
+                        {skill.level}
+                      </span>
                     </div>
-                  </div>
-                  <div className="p-2.5 rounded-full border border-white/15 text-white/60 group-hover:text-white transition-colors">
-                    <ArrowUpRight size={18} className={`transition-transform duration-300 ${isSelected ? 'translate-x-0.5 -translate-y-0.5 text-white' : ''}`} />
-                  </div>
-                </div>
 
-                {/* Domain Title & Tagline */}
-                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">
-                  {domain.title}
-                </h3>
-                <p className="text-xs font-mono uppercase tracking-wider text-white/80 mb-4">
-                  {domain.tagline}
-                </p>
-                <p className="text-sm font-light text-white/70 leading-relaxed mb-8">
-                  {domain.desc}
-                </p>
+                    <h4 className="font-heading text-lg font-bold text-[#1C1917]">
+                      {skill.name}
+                    </h4>
 
-                {/* Technology Badges */}
-                <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10">
-                  {domain.skills.map((skill) => (
-                    <span
-                      key={skill.name}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono bg-white/[0.05] border border-white/10 text-white hover:bg-white/[0.12] hover:border-white/35 transition-all hover:scale-105"
-                    >
-                      <span className="text-white/70 text-sm">{skill.icon}</span>
-                      <span>{skill.name}</span>
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+                    <p className="text-xs text-[#57534E] font-light leading-relaxed">
+                      {skill.desc}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-[#292524]/06 flex items-center justify-between text-[10px] font-mono text-[#78716C]">
+                    <span>STATUS: ACTIVE</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1C1917]" />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>

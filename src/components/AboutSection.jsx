@@ -1,149 +1,152 @@
-import React, { useRef, useLayoutEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { Award, Code2, Cpu, GraduationCap, Sparkles, Terminal, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MapPin, Phone, Mail, Globe, GraduationCap, BrainCircuit } from 'lucide-react';
-import { FaLinkedin } from 'react-icons/fa';
+import { config } from '../config';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const STATS = [
+  { value: "16+", label: "PRODUCTION APPS SHIPPED", detail: "Spanning ML, GovTech, FinTech & Algorithms" },
+  { value: "8.9", label: "CUMULATIVE CGPA", detail: "MIT World Peace University, Pune" },
+  { value: "99.9%", label: "SYSTEM UPTIME", detail: "Robust reactive pipelines & zero-bloat state" },
+  { value: "<100ms", label: "INFERENCE LATENCY", detail: "Sub-second predictive valuations" }
+];
+
+const PILLARS = [
+  {
+    icon: <Sparkles className="text-[#c2a4ff]" size={22} />,
+    tag: "GOVTECH & AI ENGINES",
+    title: "Intelligent Systems",
+    desc: "Architected NLP recommendation and recruiter ranking engines matching thousands of candidates to opportunities with automated semantic matching and scoring.",
+    tech: ["NLP", "PyTorch", "FastAPI", "Vector Search"]
+  },
+  {
+    icon: <Code2 className="text-[#c2a4ff]" size={22} />,
+    tag: "HIGH-PERFORMANCE WEB",
+    title: "Modern Full-Stack",
+    desc: "Architecting reactive systems with React 19, TypeScript, Next.js, and FastAPI. Focused on zero-bloat state orchestration, Web Audio synthesis, and dynamic 3D visuals.",
+    tech: ["React 19", "Next.js", "Three.js", "TailwindCSS"]
+  },
+  {
+    icon: <Cpu className="text-[#c2a4ff]" size={22} />,
+    tag: "PREDICTIVE MODELING",
+    title: "Applied ML & Data",
+    desc: "Developing algorithmic valuation models (EstateIQ AI), sentiment classification pipelines, and explainable predictive systems using Python, Scikit-Learn, and PyTorch.",
+    tech: ["Scikit-Learn", "Pandas", "XGBoost", "REST APIs"]
+  },
+  {
+    icon: <GraduationCap className="text-[#c2a4ff]" size={22} />,
+    tag: "COMPUTATIONAL RIGOR",
+    title: "Algorithms & Systems",
+    desc: "Maintaining an 8.9 CGPA in Computer Science at MIT-WPU. Deep grounding in Advanced Data Structures, Object-Oriented Software Design, and low-latency C++ programming.",
+    tech: ["C++", "DSA", "System Design", "OOP"]
+  }
+];
+
 export default function AboutSection() {
-  const containerRef = useRef(null);
+  const sectionRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate text blocks
-      gsap.from('.about-text', {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const cards = el.querySelectorAll('.about-bento-card');
+    const stats = el.querySelectorAll('.about-stat-item');
+
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.12,
+        duration: 0.8,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 75%',
+          trigger: el.querySelector('.about-grid'),
+          start: 'top 85%',
+          toggleActions: 'play none none none'
         }
-      });
+      }
+    );
 
-      // Animate side panels
-      gsap.from('.about-panel', {
-        x: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power3.out',
+    gsap.fromTo(
+      stats,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.7,
+        ease: 'power2.out',
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 75%',
+          trigger: el.querySelector('.about-stats-ribbon'),
+          start: 'top 88%',
+          toggleActions: 'play none none none'
         }
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
+      }
+    );
   }, []);
 
   return (
-    <section id="about" ref={containerRef} className="py-24 md:py-40 px-6 bg-[#f8f9fa] rounded-t-[3rem] -mt-10 relative z-20 text-black shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
-      <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
-        
-        {/* Left Column: Big Text & Summary */}
-        <div className="w-full lg:w-3/5 space-y-12">
-          <div className="about-text">
-            <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-bold uppercase tracking-tighter leading-none font-heading mb-6">
-              Vibe-Driven <br />
-              <span className="italic font-light text-gray-400">Engineering.</span>
-            </h2>
-          </div>
-          
-          <div className="space-y-8">
-            <p className="about-text text-2xl md:text-4xl font-light leading-snug tracking-tight">
-              I am an <span className="font-medium">aspiring AI and software developer</span> and a 2nd-year Integrated B.Tech student, passionate about building intelligent, user-focused applications by combining creativity with strong technical execution.
-            </p>
-            
-            <p className="about-text text-xl md:text-3xl font-light leading-snug text-gray-600">
-              I'm known for a vibe-driven approach to coding that emphasizes intuitive design, rapid prototyping, and practical problem-solving to create impactful, real-world applications. Experienced in developing end-to-end AI solutions, integrating real-time APIs, and crafting visually engaging interfaces.
-            </p>
-          </div>
-
-          <div className="about-text grid grid-cols-2 md:grid-cols-3 gap-8 pt-12 border-t border-black/10">
-            <div>
-              <span className="block text-5xl md:text-6xl font-medium mb-2 font-heading">AI</span>
-              <span className="text-xs md:text-sm uppercase tracking-widest text-black/50 font-bold">End-to-End Solutions</span>
-            </div>
-            <div>
-              <span className="block text-5xl md:text-6xl font-medium mb-2 font-heading">UI</span>
-              <span className="text-xs md:text-sm uppercase tracking-widest text-black/50 font-bold">Visually Engaging</span>
-            </div>
-            <div className="hidden md:block">
-              <span className="block text-5xl md:text-6xl font-medium mb-2 font-heading">API</span>
-              <span className="text-xs md:text-sm uppercase tracking-widest text-black/50 font-bold">Real-Time Integration</span>
-            </div>
+    <section className="about-section about-section-enhanced section-container" id="about" ref={sectionRef}>
+      {/* Editorial Header Row: positioned neatly to complement the 3D robot on desktop */}
+      <div className="about-me about-header-top">
+        <div className="about-meta-row">
+          <span className="about-category-pill">
+            // 02. PROFILE & PHILOSOPHY
+          </span>
+          <div className="about-live-status">
+            <span className="live-dot" />
+            <span>PUNE, INDIA // OPEN FOR HIGH-IMPACT ROLES</span>
           </div>
         </div>
 
-        {/* Right Column: Contact & Education Panels */}
-        <div className="w-full lg:w-2/5 flex flex-col gap-6 relative">
-          {/* Abstract decorative element */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#d1ff4d] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-          
-          {/* Contact Panel */}
-          <div className="about-panel p-8 md:p-10 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
-              <BrainCircuit size={100} />
-            </div>
-            <h3 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-8 font-heading">Sahil Lale</h3>
-            
-            <ul className="space-y-5 text-lg font-medium text-gray-700">
-              <li className="flex items-center gap-4 group/item">
-                <div className="p-3 rounded-full bg-gray-50 group-hover/item:bg-[#d1ff4d] transition-colors"><MapPin size={20} className="text-black" /></div>
-                Pune, Maharashtra
-              </li>
-              <li className="flex items-center gap-4 group/item">
-                <div className="p-3 rounded-full bg-gray-50 group-hover/item:bg-[#d1ff4d] transition-colors"><Phone size={20} className="text-black" /></div>
-                9272557826
-              </li>
-              <li className="flex items-center gap-4 group/item">
-                <div className="p-3 rounded-full bg-gray-50 group-hover/item:bg-[#d1ff4d] transition-colors"><Mail size={20} className="text-black" /></div>
-                sahillale17@gmail.com
-              </li>
-            </ul>
+        <h2 className="about-main-headline">
+          Turning Complex Computational Logic Into{' '}
+          <span className="about-gradient-text">
+            Elegant, Scalable Software Systems.
+          </span>
+        </h2>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <a href="https://linkedin.com/in/sahil-lale-199072355" target="_blank" rel="noopener noreferrer" className="flex-1 flex justify-center items-center gap-3 py-4 rounded-full bg-black text-white hover:bg-gray-800 transition-colors uppercase tracking-widest text-sm font-bold">
-                <FaLinkedin size={18} /> LinkedIn
-              </a>
-              <a href="https://sahil-tech.netlify.app" target="_blank" rel="noopener noreferrer" className="flex-1 flex justify-center items-center gap-3 py-4 rounded-full bg-transparent border-2 border-black text-black hover:bg-black hover:text-white transition-all uppercase tracking-widest text-sm font-bold">
-                <Globe size={18} /> Portfolio
-              </a>
-            </div>
+        <p className="about-narrative-lead">
+          I am an AI & Full-Stack Engineer pursuing Computer Science at MIT World Peace University (8.9 CGPA). 
+          I engineer robust software solutions at the convergence of <strong className="text-white">Applied Machine Learning</strong>, 
+          <strong className="text-white"> Algorithmic Platforms</strong>, and <strong className="text-white">Modern Web Architectures</strong>. 
+          With 16+ production systems deployed, I build software engineered for computational speed, clarity, and real-world impact.
+        </p>
+      </div>
+
+      {/* 4-Item Interactive Metrics Ribbon */}
+      <div className="about-stats-ribbon">
+        {STATS.map((stat, i) => (
+          <div key={i} className="about-stat-item">
+            <div className="stat-number">{stat.value}</div>
+            <div className="stat-label">{stat.label}</div>
+            <div className="stat-detail">{stat.detail}</div>
           </div>
+        ))}
+      </div>
 
-          {/* Education Panel */}
-          <div className="about-panel p-8 md:p-10 bg-[#0a0a0a] text-white rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#d1ff4d] rounded-full filter blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
-            
-            <div className="flex items-center gap-4 mb-8">
-              <div className="p-3 bg-white/10 rounded-2xl backdrop-blur-md">
-                <GraduationCap size={28} className="text-[#d1ff4d]" />
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold uppercase tracking-widest font-heading text-[#d1ff4d]">Education</h3>
+      {/* Interactive 4-Column Bento Grid */}
+      <div className="about-grid">
+        {PILLARS.map((pillar, i) => (
+          <div key={i} className="about-bento-card group">
+            <div className="card-top-row">
+              <div className="card-icon-box">{pillar.icon}</div>
+              <span className="card-tag">{pillar.tag}</span>
             </div>
-            
-            <h4 className="text-2xl md:text-3xl font-semibold leading-tight mb-3">MIT World Peace University</h4>
-            <p className="text-white/70 text-lg mb-8 font-light">Integrated B.Tech in Computer Science<br/>(Artificial Intelligence & Data Science)</p>
-            
-            <div className="flex justify-between items-end border-t border-white/20 pt-6">
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-white/50 mb-2 font-bold">CGPA</p>
-                <p className="text-4xl md:text-5xl font-mono text-[#d1ff4d]">8.9</p>
-              </div>
-              <div className="text-right">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/50 mb-2 font-bold">Scholarship</p>
-                <p className="text-lg font-medium text-white/90">MIT-WPU II <span className="text-white/50 text-sm">(2024)</span></p>
-              </div>
+            <h3 className="card-title">{pillar.title}</h3>
+            <p className="card-desc">{pillar.desc}</p>
+            <div className="card-tech-chips">
+              {pillar.tech.map((t, idx) => (
+                <span key={idx} className="card-tech-chip">{t}</span>
+              ))}
             </div>
+            <div className="card-glow-line" />
           </div>
-
-        </div>
+        ))}
       </div>
     </section>
   );

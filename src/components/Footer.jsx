@@ -8,30 +8,30 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative py-12 px-6 sm:px-12 lg:px-20 border-t border-white/10 bg-[#070709] z-20">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <footer className="relative py-12 px-6 sm:px-12 lg:px-20 border-t border-[#292524]/08 bg-[#FAFAF8] z-20 text-[#1C1917]">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         
-        {/* Brand Monogram */}
-        <div className="flex items-center gap-3">
-          <span className="font-heading text-xl font-bold tracking-tight text-white">
-            SL<span className="text-[#7cff67]">.</span>
+        {/* Brand Monogram & Copyright */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-4 text-center sm:text-left">
+          <span className="font-heading text-lg font-bold tracking-tight text-[#1C1917] flex items-center gap-0.5">
+            SL<span className="w-1.5 h-1.5 rounded-full bg-[#57534E] ml-0.5" />
           </span>
-          <span className="text-xs font-mono text-white/40">
-            © {new Date().getFullYear()} SAHIL LALE. CRAFTED WITH DISCIPLINE & VISION.
+          <span className="text-xs font-mono text-[#78716C] pt-0.5">
+            © {new Date().getFullYear()} SAHIL LALE. CRAFTED WITH ARCHITECTURAL RIGOR.
           </span>
         </div>
 
-        {/* Links & Back to Top */}
-        <div className="flex items-center gap-6">
+        {/* Links & Scroll to Top */}
+        <div className="flex items-center gap-5">
           <a
             href="https://github.com/sahil-exe-17"
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="GITHUB"
-            className="text-white/50 hover:text-white transition-colors"
-            aria-label="GitHub"
+            className="text-[#78716C] hover:text-[#1C1917] transition-colors"
+            aria-label="GitHub Profile"
           >
-            <FaGithub size={18} />
+            <FaGithub size={17} />
           </a>
 
           <a
@@ -39,19 +39,19 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="LINKEDIN"
-            className="text-white/50 hover:text-white transition-colors"
-            aria-label="LinkedIn"
+            className="text-[#78716C] hover:text-[#1C1917] transition-colors"
+            aria-label="LinkedIn Profile"
           >
-            <FaLinkedin size={18} />
+            <FaLinkedin size={17} />
           </a>
 
           <button
             onClick={scrollToTop}
             data-cursor="TOP"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono tracking-widest text-white/70 hover:text-white bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 transition-all uppercase"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider text-[#57534E] hover:text-[#1C1917] bg-white border border-[#292524]/10 hover:border-[#1C1917] transition-all uppercase shadow-[0_2px_8px_rgba(41,37,36,0.03)]"
           >
-            <span>BACK TO TOP</span>
-            <ArrowUp size={13} className="text-[#7cff67]" />
+            <span>TOP</span>
+            <ArrowUp size={12} className="text-[#1C1917]" />
           </button>
         </div>
 

@@ -1,227 +1,306 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap, MapPin, Phone, Mail, Brain, Sparkles } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { GraduationCap, Award, Rocket, Code2, ArrowUpRight, Compass, CheckCircle2 } from 'lucide-react';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
-import ElectricBorder from './ElectricBorder';
 
-const STATS = [
-  { label: 'AI Systems Automation', value: 95 },
-  { label: 'Full-Stack Engineering', value: 92 },
-  { label: 'Machine Learning Models', value: 88 },
-  { label: 'Vibecoding Velocity', value: 100 },
+function InteractiveBentoCard({ children, className = "" }) {
+  const cardRef = useRef(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), { stiffness: 200, damping: 25 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), { stiffness: 200, damping: 25 });
+
+  const handlePointerMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const handlePointerLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      className={`relative overflow-hidden rounded-2xl bg-white/85 p-6 sm:p-8 border border-[#292524]/10 shadow-[0_4px_24px_rgba(41,37,36,0.03)] hover:shadow-[0_16px_40px_rgba(41,37,36,0.08)] transition-shadow ${className}`}
+    >
+      {/* Light Stone Pearlescent Sheen Follower */}
+      <motion.div
+        style={{
+          left: useTransform(mouseX, [-0.5, 0.5], ["0%", "100%"]),
+          top: useTransform(mouseY, [-0.5, 0.5], ["0%", "100%"]),
+        }}
+        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-gradient-to-r from-[#A8A29E]/10 to-transparent blur-2xl"
+      />
+      <div className="relative z-10">{children}</div>
+    </motion.div>
+  );
+}
+
+const RUNNING_TOKENS_TOP = [
+  "SYSTEM ARCHITECTURE",
+  "ALGORITHMIC CLARITY",
+  "AI SYSTEM ARCHITECTURE",
+  "MIT-WPU CS (8.9 CGPA)",
+  "FULL-STACK ENGINEERING",
+  "ZERO BLOAT",
+  "HIGH PERFORMANCE"
 ];
 
-const KEYWORDS = [
-  "GENERATIVE AI",
-  "NEURAL ARCHITECTURES",
-  "VIBECODING",
-  "PREDICTIVE MODELING",
-  "AGENTIC WORKFLOWS",
-  "LLM FINE-TUNING",
-  "REAL-TIME APIS",
-  "INTELLIGENT SYSTEMS"
+const RUNNING_TOKENS_BOTTOM = [
+  "16+ PRODUCTION APPS",
+  "FASTAPI & PYTHON",
+  "REACT 19 & TAILWIND",
+  "SCIKIT-LEARN ML",
+  "AUDIO SYNTHESIS",
+  "COMPUTATIONAL RIGOR",
+  "GOVTECH & FINTECH"
 ];
 
 export default function About() {
   return (
-    <section
-      id="about"
-      className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden"
-    >
-      {/* Horizontal Keyword Strip */}
-      <div className="w-full overflow-hidden py-3 sm:py-4 border-y border-white/10 bg-white/[0.02] backdrop-blur-sm mb-12 sm:mb-20">
-        <motion.div
-          animate={{ x: [0, -1000] }}
-          transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
-          className="flex items-center gap-6 sm:gap-8 whitespace-nowrap"
-        >
-          {[...KEYWORDS, ...KEYWORDS, ...KEYWORDS].map((kw, i) => (
-            <span key={i} className="flex items-center gap-4 sm:gap-6 text-[11px] sm:text-sm font-mono tracking-[0.25em] text-white/50 uppercase">
-              <span>{kw}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-            </span>
-          ))}
-        </motion.div>
+    <section id="about" className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden">
+      
+      {/* Crazy Double Opposing Kinetic Ribbons */}
+      <div className="w-full overflow-hidden mb-16 sm:mb-24 space-y-2.5">
+        <div className="py-2.5 bg-[#292524]/03 border-y border-[#292524]/08 overflow-hidden">
+          <motion.div
+            animate={{ x: [0, -800] }}
+            transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
+            className="flex items-center gap-8 whitespace-nowrap"
+          >
+            {[...RUNNING_TOKENS_TOP, ...RUNNING_TOKENS_TOP, ...RUNNING_TOKENS_TOP].map((item, i) => (
+              <span key={i} className="flex items-center gap-6 text-xs font-mono tracking-[0.22em] text-[#78716C] uppercase">
+                <span>{item}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1C1917]" />
+              </span>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="py-2.5 bg-[#292524]/02 border-b border-[#292524]/08 overflow-hidden">
+          <motion.div
+            animate={{ x: [-800, 0] }}
+            transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+            className="flex items-center gap-8 whitespace-nowrap"
+          >
+            {[...RUNNING_TOKENS_BOTTOM, ...RUNNING_TOKENS_BOTTOM, ...RUNNING_TOKENS_BOTTOM].map((item, i) => (
+              <span key={i} className="flex items-center gap-6 text-xs font-mono tracking-[0.22em] text-[#A8A29E] uppercase">
+                <span>{item}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#A8A29E]" />
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
+        
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-12 sm:mb-16 pb-6 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 sm:mb-16 pb-6 border-b border-[#292524]/08">
           <div>
-            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
-              // 01. IDENTITY & PHILOSOPHY
+            <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#78716C] block mb-2">
+              // 02. PROFILE & CREDENTIALS
             </span>
-            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
-              Vibe-Driven <br />
-              <span className="text-white">
-                Engineering.
-              </span>
+            <h2 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1C1917] uppercase leading-[0.96]">
+              Academic Rigor <br />
+              <span className="editorial-serif lowercase font-normal text-[#57534E]">
+                & production
+              </span>{' '}
+              Engineering.
             </h2>
           </div>
-          <p className="text-xs sm:text-sm font-mono text-white/40 max-w-xs text-left md:text-right">
-            COMBINING DEEP DATA SCIENCE FOUNDATIONS WITH RAPID PROTOTYPING VELOCITY.
+          <p className="text-xs sm:text-sm font-mono text-[#78716C] max-w-xs text-left md:text-right">
+            DRIVEN BY EMPIRICAL SCIENCE, CLEAN CODE, AND REAL-WORLD PRODUCT DEPLOYMENT.
           </p>
         </div>
 
-        {/* Main 2-Column Editorial Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* Crazy Interactive 3D Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
           
-          {/* Left Column: Narrative & Diagnostics */}
-          <div className="lg:col-span-7 space-y-10">
-            <div className="space-y-6 text-lg sm:text-xl lg:text-2xl font-light text-white/80 leading-relaxed">
-              <p>
-                I am <span className="text-white font-medium">Sahil Lale</span>, an aspiring AI and software developer and a 2nd-year Integrated B.Tech student at MIT World Peace University. I am passionate about building intelligent, user-focused applications by combining creativity with strong technical execution.
+          {/* Bento 1: Primary Narrative Card (Span 7) */}
+          <InteractiveBentoCard className="md:col-span-7 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#292524]/06">
+                <span className="text-xs font-mono tracking-widest text-[#78716C] uppercase">
+                  BIOGRAPHY & DISCIPLINE
+                </span>
+                <span className="text-xs font-mono text-[#1C1917] font-semibold">
+                  MIT-WPU PUNE
+                </span>
+              </div>
+
+              <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[#1C1917] leading-snug">
+                Engineering software with architectural discipline, high responsiveness, and zero fluff.
+              </h3>
+
+              <p className="text-sm sm:text-base text-[#57534E] font-light leading-relaxed">
+                I am an Integrated B.Tech Computer Science student at MIT World Peace University (8.9 CGPA, Scholarship Recipient). Over the past two years, I have engineered and shipped <strong className="font-semibold text-[#1C1917]">16+ production-grade web applications</strong> spanning GovTech platforms, PropTech valuation models, and interactive educational engines.
               </p>
-              <p className="text-base sm:text-lg text-white/70 font-light leading-relaxed">
-                I'm known for a <span className="text-white font-medium">vibe-driven approach to coding</span> that emphasizes intuitive design, rapid prototyping, and practical problem-solving to create impactful, real-world applications. Experienced in developing end-to-end AI solutions, integrating real-time APIs, and crafting visually engaging interfaces.
+
+              <p className="text-sm sm:text-base text-[#57534E] font-light leading-relaxed">
+                As lead engineer for <strong className="font-semibold text-[#1C1917]">India Intern AI</strong>, I designed an intelligent recommendation and recruiter ranking platform solving national-scale candidate placement bottlenecks.
               </p>
             </div>
 
-            {/* Capability Metrics / Diagnostics Panel */}
-            <ElectricBorder
-              color="#7cff67"
-              speed={0.5}
-              chaos={0.05}
-              thickness={1.1}
-              borderRadius={24}
-              className="w-full"
-            >
-              <div className="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden border border-white/15">
-                <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-                  <div className="flex items-center gap-2 text-xs font-mono tracking-wider text-white/70 uppercase">
-                    <Brain size={14} className="text-white" />
-                    <span>System Diagnostics // Core Capabilities</span>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/20">
-                    OPTIMAL
-                  </span>
-                </div>
+            <div className="mt-6 pt-4 border-t border-[#292524]/06 flex items-center justify-between text-xs font-mono text-[#78716C]">
+              <span>LOCATION: PUNE, MAHARASHTRA</span>
+              <span className="font-semibold text-[#1C1917]">STATUS: OPEN TO ROLES</span>
+            </div>
+          </InteractiveBentoCard>
 
-                <div className="space-y-5">
-                  {STATS.map((stat, i) => (
-                    <div key={stat.label} className="space-y-2">
-                      <div className="flex justify-between text-xs font-mono tracking-wider">
-                        <span className="text-white/70">{stat.label}</span>
-                        <span className="text-white font-bold">{stat.value}%</span>
-                      </div>
-                      <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${stat.value}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1.2, delay: 0.1 * i, ease: 'easeOut' }}
-                          className="h-full rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.7)]"
-                        />
-                      </div>
-                    </div>
-                  ))}
+          {/* Bento 2: Academic Honors & Scholarship (Span 5) */}
+          <InteractiveBentoCard className="md:col-span-5 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#292524]/06">
+                <div className="p-2 rounded-xl bg-[#292524]/05 text-[#1C1917]">
+                  <GraduationCap size={20} />
                 </div>
+                <span className="text-xs font-mono font-bold text-[#1C1917] px-2.5 py-0.5 rounded-full bg-[#292524]/05">
+                  8.9 CGPA
+                </span>
               </div>
-            </ElectricBorder>
-          </div>
 
-          {/* Right Column: Education & Contact Cards */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Education Glass Card */}
-            <ElectricBorder
-              color="#B497CF"
-              speed={0.5}
-              chaos={0.05}
-              thickness={1.1}
-              borderRadius={24}
-              className="w-full"
-            >
-              <div className="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden group border border-white/15">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.05] border border-white/10 text-white">
-                    <GraduationCap size={22} />
-                  </div>
-                  <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-white/70">
-                    ACADEMIC FOUNDATION
-                  </span>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-bold font-heading text-white tracking-tight mb-2">
+              <div>
+                <span className="text-[10px] font-mono tracking-widest text-[#78716C] uppercase">
+                  ACADEMIC STANDING
+                </span>
+                <h4 className="font-heading text-xl font-bold text-[#1C1917] mt-1">
                   MIT World Peace University
-                </h3>
-                <p className="text-sm font-light text-white/70 mb-6">
-                  Integrated B.Tech in Computer Science<br />
-                  <span className="text-white/50 text-xs font-mono">Specialization: Artificial Intelligence & Data Science</span>
+                </h4>
+                <p className="text-xs font-mono text-[#57534E] mt-0.5">
+                  Integrated B.Tech in Computer Science & Engineering
                 </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-6 border-t border-white/10">
-                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block mb-1">
-                      CUMULATIVE CGPA
-                    </span>
-                    <span className="text-3xl sm:text-4xl font-mono font-bold text-white">
-                      8.9
-                    </span>
-                  </div>
-
-                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block mb-1">
-                      HONORS & AWARDS
-                    </span>
-                    <span className="text-sm font-semibold text-white block">
-                      MIT-WPU II
-                    </span>
-                    <span className="text-xs font-mono text-white/60">
-                      Scholarship (2024)
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </ElectricBorder>
-
-            {/* Direct Connect Glass Card */}
-            <div className="glass-card p-6 sm:p-8 rounded-3xl relative border border-white/15">
-              <h4 className="text-xs sm:text-sm font-mono uppercase tracking-widest text-white/60 mb-6 flex items-center gap-2">
-                <Sparkles size={14} className="text-white" />
-                <span>DIRECT REACH</span>
-              </h4>
-
-              <div className="space-y-4 text-sm font-light text-white/80">
-                <div className="flex items-center gap-3">
-                  <MapPin size={16} className="text-white shrink-0" />
-                  <span className="truncate">Pune, Maharashtra, India</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone size={16} className="text-white shrink-0" />
-                  <span className="font-mono">9272557826</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail size={16} className="text-white shrink-0" />
-                  <a href="mailto:sahillale17@gmail.com" className="hover:text-white transition-colors underline underline-offset-4 truncate">
-                    sahillale17@gmail.com
-                  </a>
-                </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 sm:mt-8 pt-6 border-t border-white/10">
-                <a
-                  href="https://linkedin.com/in/sahil-lale-199072355"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-3 px-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 hover:border-white/30 text-xs font-medium text-white flex items-center justify-center gap-2 transition-all hover:scale-105"
-                >
-                  <FaLinkedin size={15} />
-                  <span>LinkedIn</span>
-                </a>
+              <div className="p-3.5 rounded-xl bg-[#292524]/03 border border-[#292524]/06 text-xs text-[#44403C] space-y-1">
+                <div className="font-semibold text-[#1C1917] flex items-center gap-1.5">
+                  <Award size={14} />
+                  <span>MIT-WPU Scholarship Recipient</span>
+                </div>
+                <p className="text-[#57534E] font-light leading-relaxed">
+                  Honored with the university distinction scholarship for continuous academic excellence across Data Structures, Algorithms, and Object-Oriented Design.
+                </p>
+              </div>
+            </div>
 
+            <div className="pt-4 border-t border-[#292524]/06 text-xs font-mono text-[#78716C]">
+              BATCH: 2023 — PRESENT (PUNE, IN)
+            </div>
+          </InteractiveBentoCard>
+
+          {/* Bento 3: Hackathon Distinction (Span 5) */}
+          <InteractiveBentoCard className="md:col-span-5 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#292524]/06">
+                <div className="p-2 rounded-xl bg-[#292524]/05 text-[#1C1917]">
+                  <Award size={20} />
+                </div>
+                <span className="text-xs font-mono font-bold text-[#1C1917] px-2.5 py-0.5 rounded-full bg-[#292524]/05">
+                  GOVTECH AI
+                </span>
+              </div>
+
+              <div>
+                <span className="text-[10px] font-mono tracking-widest text-[#78716C] uppercase">
+                  AUTONOMOUS AI ENGINE
+                </span>
+                <h4 className="font-heading text-xl font-bold text-[#1C1917] mt-1">
+                  India Intern AI Engine
+                </h4>
+                <p className="text-xs font-mono text-[#57534E] mt-0.5">
+                  Autonomous Placement & Recruiter Ranking
+                </p>
+              </div>
+
+              <p className="text-xs sm:text-sm text-[#57534E] font-light leading-relaxed">
+                Engineered India Intern AI: an intelligent bidirectional recommendation engine built for automated candidate matching and recruiter ranking at scale.
+              </p>
+            </div>
+
+            <a
+              href="https://lnkd.in/dt8WygUn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pt-4 border-t border-[#292524]/06 flex items-center justify-between text-xs font-mono text-[#1C1917] hover:underline"
+            >
+              <span>VIEW PROJECT DETAILS</span>
+              <ArrowUpRight size={13} />
+            </a>
+          </InteractiveBentoCard>
+
+          {/* Bento 4: Production Volume & Channels (Span 7) */}
+          <InteractiveBentoCard className="md:col-span-7 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#292524]/06">
+                <span className="text-xs font-mono tracking-widest text-[#78716C] uppercase">
+                  DEPLOYMENT TRACK RECORD
+                </span>
+                <span className="text-xs font-mono font-bold text-[#1C1917]">
+                  16 REAL APPLICATIONS
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="p-3.5 rounded-xl bg-[#292524]/03 border border-[#292524]/06 text-center">
+                  <span className="font-heading text-2xl font-bold text-[#1C1917] block">16+</span>
+                  <span className="text-[10px] font-mono text-[#78716C]">Live Systems</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#292524]/03 border border-[#292524]/06 text-center">
+                  <span className="font-heading text-2xl font-bold text-[#1C1917] block">8.9</span>
+                  <span className="text-[10px] font-mono text-[#78716C]">CGPA MIT-WPU</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#292524]/03 border border-[#292524]/06 text-center">
+                  <span className="font-heading text-2xl font-bold text-[#1C1917] block">99%</span>
+                  <span className="text-[10px] font-mono text-[#78716C]">Precision Score</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#292524]/03 border border-[#292524]/06 text-center">
+                  <span className="font-heading text-2xl font-bold text-[#1C1917] block">100%</span>
+                  <span className="text-[10px] font-mono text-[#78716C]">Real Products</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <a
                   href="https://github.com/sahil-exe-17"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-3 px-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 hover:border-white/30 text-xs font-medium text-white flex items-center justify-center gap-2 transition-all hover:scale-105"
+                  className="flex-1 p-3 rounded-xl bg-[#292524]/03 hover:bg-[#1C1917] hover:text-[#FAFAF8] transition-all flex items-center justify-between text-xs font-mono text-[#1C1917]"
                 >
-                  <FaGithub size={15} />
-                  <span>GitHub</span>
+                  <div className="flex items-center gap-2">
+                    <FaGithub size={15} />
+                    <span>github.com/sahil-exe-17</span>
+                  </div>
+                  <ArrowUpRight size={13} />
+                </a>
+
+                <a
+                  href="https://linkedin.com/in/sahil-lale-199072355"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 p-3 rounded-xl bg-[#292524]/03 hover:bg-[#1C1917] hover:text-[#FAFAF8] transition-all flex items-center justify-between text-xs font-mono text-[#1C1917]"
+                >
+                  <div className="flex items-center gap-2">
+                    <FaLinkedin size={15} />
+                    <span>sahil-lale-199072355</span>
+                  </div>
+                  <ArrowUpRight size={13} />
                 </a>
               </div>
             </div>
 
-          </div>
+            <div className="pt-4 border-t border-[#292524]/06 text-xs font-mono text-[#78716C] flex items-center justify-between">
+              <span>CONTACT: sahillale17@gmail.com</span>
+              <span className="text-[#1C1917]">VERIFIED CREDENTIALS ✓</span>
+            </div>
+          </InteractiveBentoCard>
 
         </div>
       </div>

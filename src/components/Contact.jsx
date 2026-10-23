@@ -1,227 +1,204 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, ArrowUpRight, Check, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ArrowUpRight, Check, Copy } from 'lucide-react';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
-import ElectricBorder from './ElectricBorder';
 
 export default function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [isCopied, setIsCopied] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const email = "sahillale17@gmail.com";
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(email);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2500);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Project Inquiry from ${formState.name}`);
+    const subject = encodeURIComponent(`Engineering Inquiry from ${formState.name}`);
     const body = encodeURIComponent(`Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`);
-    window.location.href = `mailto:sahillale17@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
     setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 6000);
+    setTimeout(() => setIsSubmitted(false), 5000);
   };
 
   return (
     <section id="contact" className="relative py-20 sm:py-32 px-4 sm:px-8 lg:px-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Section Header with Scroll Entrance */}
-        <motion.div
-          initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-12 sm:mb-16 pb-6 border-b border-white/10"
-        >
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 sm:mb-16 pb-6 border-b border-[#292524]/08">
           <div>
-            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 block mb-2">
-              // 06. CONNECT & COLLABORATE
+            <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#78716C] block mb-2">
+              // 07. CONNECT & COLLABORATE
             </span>
-            <h2 className="font-heading text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
-              Have An Idea? <br />
-              <span className="text-white">
-                Let's Build It.
-              </span>
+            <h2 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1C1917] uppercase leading-[0.98]">
+              Have An <br />
+              <span className="editorial-serif lowercase font-normal text-[#57534E]">
+                ambitious
+              </span>{' '}
+              Idea? Let's Build.
             </h2>
           </div>
-          <p className="text-xs sm:text-sm font-mono text-white/40 max-w-xs text-left md:text-right">
-            AVAILABLE FOR HIGH-IMPACT ROLES, AI INNOVATION & BESPOKE APPLICATIONS.
+          <p className="text-xs sm:text-sm font-mono text-[#78716C] max-w-xs text-left md:text-right">
+            AVAILABLE FOR HIGH-IMPACT SOFTWARE ENGINEERING ROLES & SELECT PROJECTS.
           </p>
-        </motion.div>
+        </div>
 
-        {/* 2-Column Contact Interface with Scroll Animation */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        {/* 2-Column Contact Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Column: Direct Info & Social Badges */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-5 space-y-6 sm:space-y-8"
-          >
-            <p className="text-base sm:text-lg lg:text-xl font-light text-white/80 leading-relaxed">
-              Whether you are looking to architect intelligent autonomous agents, integrate generative AI into your product stack, or craft high-velocity digital experiences, my inbox is open.
-            </p>
+          {/* Left Column: Direct Info & Quick Copy */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-white/80 p-6 sm:p-8 rounded-2xl border border-[#292524]/08 shadow-[0_4px_20px_rgba(41,37,36,0.02)] space-y-5">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#78716C]">
+                DIRECT CHANNELS
+              </span>
 
-            {/* Contact Details List */}
-            <div className="glass-card p-5 sm:p-8 rounded-3xl space-y-4 sm:space-y-5 border border-white/15">
-              <a
-                href="mailto:sahillale17@gmail.com"
-                className="flex items-center gap-3 sm:gap-4 group text-white/80 hover:text-white transition-colors"
-              >
-                <div className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.05] border border-white/10 group-hover:border-white/40 transition-colors shrink-0">
-                  <Mail size={18} className="text-white" />
-                </div>
-                <div className="min-w-0">
-                  <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider block">EMAIL</span>
-                  <span className="text-xs sm:text-base font-mono font-medium text-white truncate block">sahillale17@gmail.com</span>
-                </div>
-              </a>
+              <p className="text-sm sm:text-base text-[#57534E] font-light leading-relaxed">
+                Whether you are exploring high-performance web systems, architectural product engineering, or seeking a disciplined developer for your team, my inbox is open.
+              </p>
 
-              <a
-                href="tel:9272557826"
-                className="flex items-center gap-3 sm:gap-4 group text-white/80 hover:text-white transition-colors"
-              >
-                <div className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.05] border border-white/10 group-hover:border-white/40 transition-colors shrink-0">
-                  <Phone size={18} className="text-white" />
-                </div>
-                <div className="min-w-0">
-                  <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider block">PHONE</span>
-                  <span className="text-xs sm:text-base font-mono font-medium text-white block">+91 9272557826</span>
-                </div>
-              </a>
+              {/* One-Click Copy Pill */}
+              <div className="pt-2">
+                <button
+                  onClick={handleCopyEmail}
+                  data-cursor="COPY"
+                  className="w-full flex items-center justify-between p-3.5 rounded-xl bg-[#292524]/04 hover:bg-[#292524]/08 border border-[#292524]/10 transition-all text-xs font-mono text-[#1C1917] group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Mail size={16} className="text-[#57534E]" />
+                    <span className="font-semibold">{email}</span>
+                  </div>
 
-              <div className="flex items-center gap-3 sm:gap-4 text-white/80">
-                <div className="p-2.5 sm:p-3 rounded-2xl bg-white/[0.05] border border-white/10 shrink-0">
-                  <MapPin size={18} className="text-white" />
+                  <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wider bg-white border border-[#292524]/10 text-[#78716C] group-hover:text-[#1C1917]">
+                    {isCopied ? (
+                      <>
+                        <Check size={12} className="text-[#1C1917]" />
+                        <span>COPIED</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={12} />
+                        <span>CLICK TO COPY</span>
+                      </>
+                    )}
+                  </span>
+                </button>
+              </div>
+
+              {/* Coordinates */}
+              <div className="pt-4 border-t border-[#292524]/06 space-y-2 text-xs font-mono text-[#78716C]">
+                <div className="flex items-center gap-2">
+                  <MapPin size={14} className="text-[#57534E]" />
+                  <span>Pune, Maharashtra, India // IST Timezone</span>
                 </div>
-                <div className="min-w-0">
-                  <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider block">LOCATION</span>
-                  <span className="text-xs sm:text-base font-medium text-white block">Pune, Maharashtra, India</span>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#1C1917] ml-0.5" />
+                  <span className="text-[#1C1917] font-semibold">Available for full-time & high-impact contracts</span>
                 </div>
               </div>
             </div>
 
-            {/* Social Connect Badges */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <motion.a
-                whileHover={{ y: -4, scale: 1.03 }}
-                href="https://linkedin.com/in/sahil-lale-199072355"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-card p-4 sm:p-5 rounded-2xl border border-white/10 hover:border-white/40 flex items-center justify-between group transition-all shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
-              >
-                <div className="flex items-center gap-3">
-                  <FaLinkedin size={18} className="text-white group-hover:scale-110 transition-transform" />
-                  <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white">LinkedIn</span>
-                </div>
-                <ArrowUpRight size={15} className="text-white/40 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </motion.a>
-
-              <motion.a
-                whileHover={{ y: -4, scale: 1.03 }}
+            {/* Social channels */}
+            <div className="flex gap-3">
+              <a
                 href="https://github.com/sahil-exe-17"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card p-4 sm:p-5 rounded-2xl border border-white/10 hover:border-white/40 flex items-center justify-between group transition-all shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+                data-cursor="GITHUB"
+                className="flex-1 p-4 rounded-xl bg-white/80 border border-[#292524]/08 hover:border-[#1C1917] transition-all flex items-center justify-between text-xs font-mono text-[#1C1917]"
               >
-                <div className="flex items-center gap-3">
-                  <FaGithub size={18} className="text-white group-hover:scale-110 transition-transform" />
-                  <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white">GitHub</span>
+                <div className="flex items-center gap-2">
+                  <FaGithub size={16} />
+                  <span>GitHub</span>
                 </div>
-                <ArrowUpRight size={15} className="text-white/40 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </motion.a>
+                <ArrowUpRight size={14} className="text-[#78716C]" />
+              </a>
+
+              <a
+                href="https://linkedin.com/in/sahil-lale-199072355"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="LINKEDIN"
+                className="flex-1 p-4 rounded-xl bg-white/80 border border-[#292524]/08 hover:border-[#1C1917] transition-all flex items-center justify-between text-xs font-mono text-[#1C1917]"
+              >
+                <div className="flex items-center gap-2">
+                  <FaLinkedin size={16} />
+                  <span>LinkedIn</span>
+                </div>
+                <ArrowUpRight size={14} className="text-[#78716C]" />
+              </a>
             </div>
+          </div>
 
-          </motion.div>
-
-          {/* Right Column: Glass Message Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-7"
-          >
-            <ElectricBorder
-              color="#7cff67"
-              speed={0.5}
-              chaos={0.05}
-              thickness={1.1}
-              borderRadius={24}
-              className="w-full"
+          {/* Right Column: Minimalist Message Form */}
+          <div className="lg:col-span-7">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white/90 p-6 sm:p-8 rounded-2xl border border-[#292524]/08 shadow-[0_4px_24px_rgba(41,37,36,0.02)] space-y-5"
             >
-              <div className="glass-card p-5 sm:p-8 lg:p-12 rounded-3xl border border-white/20 relative shadow-[0_25px_80px_rgba(0,0,0,0.8)]">
-              <h3 className="font-heading text-xl sm:text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-2">
-                <span>Send A Direct Message</span>
-                <Sparkles size={18} className="text-white" />
-              </h3>
-              <p className="text-[10px] sm:text-xs font-mono text-white/40 mb-6 sm:mb-8 uppercase tracking-wider">
-                TRANSMIT INQUIRIES // IMMEDIATE NOTIFICATION
-              </p>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#78716C] block">
+                SEND AN INQUIRY
+              </span>
 
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <div className="space-y-2">
-                    <label className="text-xs font-mono uppercase tracking-widest text-white/70 block">
-                      YOUR NAME
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      placeholder="e.g. Alex Mercer"
-                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/10 focus:border-white focus:outline-none text-white text-sm placeholder:text-white/30 transition-colors"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-mono uppercase tracking-widest text-white/70 block">
-                      YOUR EMAIL
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      placeholder="alex@company.com"
-                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/10 focus:border-white focus:outline-none text-white text-sm placeholder:text-white/30 transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-mono uppercase tracking-widest text-white/70 block">
-                    PROJECT VISION & DETAILS
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-mono tracking-wider uppercase text-[#78716C]">
+                    Your Name
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     required
-                    rows={5}
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    placeholder="Describe your vision, requirements, or collaboration goals..."
-                    className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/10 focus:border-white focus:outline-none text-white text-sm placeholder:text-white/30 transition-colors resize-none"
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                    placeholder="e.g. Jane Doe"
+                    className="w-full px-4 py-3 rounded-xl bg-[#292524]/03 border border-[#292524]/10 focus:border-[#1C1917] focus:bg-white text-xs sm:text-sm text-[#1C1917] placeholder-[#A8A29E] outline-none transition-all font-mono"
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-full font-semibold uppercase tracking-wider text-xs sm:text-sm text-black bg-white shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:shadow-[0_0_45px_rgba(255,255,255,0.5)] hover:scale-[1.02] active:scale-98 transition-all duration-300 flex items-center justify-center gap-2 font-bold"
-                >
-                  {isSubmitted ? (
-                    <>
-                      <Check size={16} />
-                      <span>Message Ready in Mail Client!</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Transmit Message</span>
-                      <Send size={15} />
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
-            </ElectricBorder>
-          </motion.div>
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-mono tracking-wider uppercase text-[#78716C]">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formState.email}
+                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                    placeholder="e.g. jane@company.com"
+                    className="w-full px-4 py-3 rounded-xl bg-[#292524]/03 border border-[#292524]/10 focus:border-[#1C1917] focus:bg-white text-xs sm:text-sm text-[#1C1917] placeholder-[#A8A29E] outline-none transition-all font-mono"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-mono tracking-wider uppercase text-[#78716C]">
+                  Project Brief or Inquiry
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  value={formState.message}
+                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                  placeholder="Outline your project scope, timeline, or engineering opportunity..."
+                  className="w-full px-4 py-3 rounded-xl bg-[#292524]/03 border border-[#292524]/10 focus:border-[#1C1917] focus:bg-white text-xs sm:text-sm text-[#1C1917] placeholder-[#A8A29E] outline-none transition-all font-mono resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                data-cursor="TRANSMIT"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full font-mono font-semibold uppercase tracking-wider text-xs text-[#FAFAF8] bg-[#1C1917] hover:bg-[#292524] active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(28,25,23,0.15)]"
+              >
+                <span>{isSubmitted ? 'Transmitting Message...' : 'Transmit Message'}</span>
+                <Send size={13} />
+              </button>
+            </form>
+          </div>
 
         </div>
 
