@@ -13,6 +13,7 @@ import WorkSection from './WorkSection';
 import TechStackSection from './TechStackSection';
 import CtaSection from './CtaSection';
 import ContactSection from './ContactSection';
+import MonumentalFooter from './MonumentalFooter';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,35 +26,43 @@ export default function MainPortfolio({ lenisRef, isLoading }) {
     };
     window.addEventListener('resize', handleResize);
 
-    // High performance smooth Lenis synchronized with GSAP ticker
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1.2,
-      touchMultiplier: 2,
-      infinite: false
-    });
+    const isDesktopDevice = window.innerWidth > 1024 && !window.matchMedia('(pointer: coarse)').matches;
+    let lenis = null;
+    let updateTicker = null;
 
-    if (lenisRef) {
-      lenisRef.current = lenis;
+    if (isDesktopDevice) {
+      lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1.1,
+        touchMultiplier: 1.0,
+        infinite: false
+      });
+
+      if (lenisRef) {
+        lenisRef.current = lenis;
+      }
+
+      lenis.on('scroll', ScrollTrigger.update);
+
+      updateTicker = (time) => {
+        lenis.raf(time * 1000);
+      };
+      gsap.ticker.add(updateTicker);
+      gsap.ticker.lagSmoothing(500, 33);
+    } else {
+      if (lenisRef) {
+        lenisRef.current = null;
+      }
     }
-
-    // Synchronize Lenis with GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
-
-    const updateTicker = (time) => {
-      lenis.raf(time * 1000);
-    };
-    gsap.ticker.add(updateTicker);
-    gsap.ticker.lagSmoothing(0);
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      gsap.ticker.remove(updateTicker);
-      lenis.destroy();
+      if (updateTicker) gsap.ticker.remove(updateTicker);
+      if (lenis) lenis.destroy();
     };
   }, [lenisRef]);
 
@@ -66,7 +75,7 @@ export default function MainPortfolio({ lenisRef, isLoading }) {
       {isDesktop && !isLoading && <Character3D />}
 
       {/* Main Connected Editorial Flow */}
-      <div className="container-main">
+      <div className="editorial-sections">
         <Hero />
         <AboutSection />
         <WhatIDo />
@@ -75,6 +84,7 @@ export default function MainPortfolio({ lenisRef, isLoading }) {
         <TechStackSection />
         <CtaSection />
         <ContactSection />
+        <MonumentalFooter />
       </div>
     </div>
   );

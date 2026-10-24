@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './styles/portfolio.css';
-import CustomCursor from './components/CustomCursor';
+import { ThemeProvider } from './context/ThemeContext';
 import LoadingScreen from './components/LoadingScreen';
 import MainPortfolio from './components/MainPortfolio';
 import MyWorksPage from './components/MyWorksPage';
@@ -11,9 +11,8 @@ export default function App() {
   const lenisRef = useRef(null);
 
   return (
-    <BrowserRouter>
-      {/* Custom hardware-accelerated magnetic cursor */}
-      <CustomCursor />
+    <ThemeProvider>
+      <BrowserRouter>
 
       {/* Interactive Ping-Pong & Marquee Loading Screen */}
       {isLoading && (
@@ -39,5 +38,6 @@ export default function App() {
         </Routes>
       </main>
     </BrowserRouter>
+  </ThemeProvider>
   );
 }

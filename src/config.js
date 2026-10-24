@@ -82,31 +82,31 @@ export const config = {
       technologies: ["Python", "NumPy", "Pandas", "Scikit-Learn", "Matplotlib"]
     }
   ],
-  projects: [
+projects: [
     {
       id: "india-intern-ai",
       title: "India Intern AI",
-      category: "GovTech AI Recommendation Engine",
-      technologies: "Python, NLP, Scikit-Learn, FastAPI, React 19",
-      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
-      description: "An AI-driven internship recommendation engine & recruiter ranking platform solving national candidate placement and matching bottlenecks.",
+      category: "SIH 2025 // GovTech AI Engine",
+      technologies: "Python, NLP, Scikit-Learn, React 19, FastAPI, Vector Search, Tailwind CSS",
+      image: "/projects/india-intern-ai.svg",
+      description: "Smart India Hackathon 2025 Project (PS ID: 25034): An AI-driven internship recommendation engine & recruiter ranking platform for the PM Internship Scheme, connecting students from rural and underserved regions with high-fit opportunities.",
       link: "https://lnkd.in/dt8WygUn"
     },
     {
       id: "estateiq-ai",
       title: "EstateIQ AI",
       category: "PropTech Valuation & AI Platform",
-      technologies: "React 19, TypeScript, FastAPI, Python, Scikit-Learn",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
-      description: "An intelligent PropTech platform combining Scikit-Learn ML models with Groq GenAI for instant property valuations, algorithmic ROI investment scoring, and interactive AI market intelligence.",
+      technologies: "React 19, TypeScript, FastAPI, Python, Scikit-Learn, Groq API, Tailwind CSS",
+      image: "/projects/estateiq-ai.svg",
+      description: "An intelligent PropTech valuation and investment platform combining Scikit-Learn ML pricing models with Groq GenAI market intelligence for instant property valuations, algorithmic ROI scoring, and micro-market insights.",
       link: "https://estateiq-ai-omega.vercel.app/"
     },
     {
       id: "stackflow-ai",
       title: "StackFlow AI",
       category: "AI Algorithmic Engine",
-      technologies: "React 19, Groq AI, Algorithms, Tailwind CSS",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+      technologies: "React 19, Groq AI, Data Structures, Tailwind CSS, Framer Motion",
+      image: "/projects/stackflow-ai.png",
       description: "An interactive educational platform visualizing complex data structures with real-time Groq AI tutor explanations and dynamic execution tracking.",
       link: "https://stack-flow-ai.vercel.app/"
     },
@@ -114,76 +114,130 @@ export const config = {
       id: "cryptopulse-ai",
       title: "CryptoPulse AI",
       category: "Crypto Intelligence Platform",
-      technologies: "React 19, FastAPI, Market Data, Tailwind CSS",
-      image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=1200&q=80",
+      technologies: "Next.js, TypeScript, Tailwind CSS, Firebase, CoinGecko API",
+      image: "/projects/cryptopulse-ai.png",
       description: "A sleek cryptocurrency platform providing live market tracking, simulated AI price forecasting, and multi-timeframe interactive charts.",
       link: "https://cryptopulse-ai64.vercel.app/"
     },
     {
       id: "treenova",
-      title: "TreeNova",
+      title: "TreeNova BST",
       category: "Educational Algorithm Tool",
-      technologies: "React 19, Web Audio API, SVG Engine, Algorithms",
-      image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80",
-      description: "A BST visualizer featuring recursive SVG logic, in-browser synthesized audio via Web Audio API, and zero-lag state orchestration.",
+      technologies: "React 19, Tailwind v4, Zustand, Web Audio API, Framer Motion",
+      image: "/projects/treenova.svg",
+      description: "A premium 'Cyberpunk' BST visualizer featuring recursive SVG logic, in-browser synthesized audio via Web Audio API, and zero-lag state orchestration.",
       link: "https://treenova-bst-visualizer.vercel.app"
     },
     {
       id: "matchmind-ai",
       title: "MatchMind AI",
-      category: "AI Sports Intelligence",
-      technologies: "Python, FastAPI, Scikit-Learn, React 19",
-      image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1200&q=80",
+      category: "AI Intelligence Platform",
+      technologies: "React, Node.js, Framer Motion, Recharts, XGBoost, Vercel",
+      image: "/projects/matchmind-ai.svg",
       description: "A premium AI ensemble platform for TATA IPL 2026, providing hyper-accurate match predictions and cinematic statistical insights.",
       link: "https://matchmind-ai-chi.vercel.app"
     },
     {
       id: "stock-sense-ai",
       title: "Stock Sense AI",
-      category: "AI FinTech Platform",
-      technologies: "Python, FastAPI, Pandas, Scikit-Learn",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
-      description: "A predictive stock intelligence platform combining ML classifiers, sentiment analysis pipelines, and explainable AI market forecasting.",
+      category: "AI Fintech Platform",
+      technologies: "React, FastAPI, Python, XGBoost, NLP, Vader Sentiment",
+      image: "/projects/stock-sense-ai.svg",
+      description: "A next-generation stock intelligence platform combining ML, sentiment analysis, and explainable AI to deliver predictive market insights.",
       link: "https://stock-sense-ai.netlify.app/"
     },
     {
-      id: "spectra-ai",
-      title: "Spectra AI",
-      category: "AI Productivity Suite",
-      technologies: "React, Next.js, OpenAI API, Tailwind CSS",
-      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-      description: "A modern AI toolkit combining multi-modal content generation, text summarization, and workflow automation into a single responsive platform.",
-      link: "https://spectra-ai-tools.netlify.app/"
+      id: "ascendia-ai",
+      title: "Ascendia AI",
+      category: "AI Placement Assistant",
+      technologies: "React, FastAPI, Gemini API, Tailwind CSS, Python",
+      image: "/projects/ascendia-ai.svg",
+      description: "A full-stack AI-powered placement assistant with resume analyzer (ATS scoring), interactive mock interview system, and personalized roadmap generator.",
+      link: "https://ascendia-ai.netlify.app/"
     },
     {
       id: "culina-ai",
       title: "Culina AI",
       category: "Full Stack AI App",
-      technologies: "React, Web Speech API, Node.js, NLP",
-      image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80",
-      description: "A smart recipe application powered by AI, featuring real-time macro tracking, Web Speech API voice interface, and intelligent ingredient parsing.",
+      technologies: "React, Tailwind CSS, Framer Motion, Spoonacular API, OpenAI API",
+      image: "/projects/culina-ai.svg",
+      description: "A smart recipe application powered by AI, featuring real-time macro tracking, voice interface, and ingredient parsing.",
       link: "https://culina-ai.netlify.app/"
     },
     {
       id: "travix-ai",
       title: "Travix AI",
       category: "Generative AI Agent",
-      technologies: "React, Leaflet, Gemini API, Tailwind CSS",
-      image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80",
-      description: "An intelligent travel planner utilizing LLMs to generate personalized, budget-optimized itineraries with interactive Leaflet geo-routing.",
+      technologies: "React, Tailwind CSS, Framer Motion, LLM APIs, Mapbox",
+      image: "/projects/travix-ai.svg",
+      description: "An intelligent travel planner utilizing LLMs to generate personalized, budget-optimized itineraries with interactive maps and destination reasoning.",
       link: "https://travix-ai.netlify.app"
     },
     {
-      id: "ascendia-ai",
-      title: "Ascendia AI",
-      category: "AI Placement Assistant",
-      technologies: "React 19, FastAPI, Groq AI, Tailwind CSS",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1200&q=80",
-      description: "A full-stack AI-powered placement assistant with automated resume analyzer, interactive mock interview system, and personalized roadmap generator.",
-      link: "https://ascendia-ai.netlify.app/"
+      id: "spectra-ai",
+      title: "Spectra AI",
+      category: "AI Productivity Suite",
+      technologies: "React, AI APIs, Tailwind CSS, Vite",
+      image: "/projects/spectra-ai.svg",
+      description: "A modern AI toolkit combining content generation, text processing, and workflow automation into a single scalable platform.",
+      link: "https://spectra-ai-tools.netlify.app/"
+    },
+    {
+      id: "ml-classifier",
+      title: "ML Classifier Studio",
+      category: "Interactive ML Platform",
+      technologies: "React, FastAPI, Python, Scikit-Learn, Tailwind CSS",
+      image: "/projects/ml-classifier.svg",
+      description: "Experiment with core algorithms including Decision Trees and Naive Bayes on custom datasets with real-time parameter tuning and visual boundaries.",
+      link: "https://ml-classifier-studio.netlify.app"
+    },
+    {
+      id: "earniq",
+      title: "EarnIQ",
+      category: "Data Science Platform",
+      technologies: "Python, Flask, XGBoost, Scikit-Learn, Chart.js",
+      image: "/projects/earniq.svg",
+      description: "A predictive salary modeling dashboard built with a Flask backend, utilizing XGBoost to provide real-time compensation insights based on role and experience.",
+      link: "https://github.com/SahilLale/EarnIQ"
+    },
+    {
+      id: "pune-traffic",
+      title: "Pune Traffic Jam Predictor",
+      category: "Smart City Infrastructure",
+      technologies: "React, Next.js, Google Maps API, Traffic APIs, Tailwind CSS",
+      image: "/projects/pune-traffic.png",
+      description: "A real-time monitoring tool designed to help commuters navigate Pune's congestion by providing proactive alerts for specific city chokepoints and live travel times.",
+      link: "https://pune-traffic-jam-predictor-363.created.app/"
+    },
+    {
+      id: "zentrix",
+      title: "ZentriX App",
+      category: "Web Application",
+      technologies: "React, Firebase, Tailwind CSS, Framer Motion",
+      image: "/projects/zentrix.png",
+      description: "A responsive web application for ZentriX eSports that presents team information, player roster details, and dynamic tournament statistics.",
+      link: "https://stately-babka-61d818.netlify.app/"
+    },
+    {
+      id: "intelaris",
+      title: "Intelaris",
+      category: "Interactive Logic Game",
+      technologies: "React, Tailwind CSS, Framer Motion, Web Audio API",
+      image: "/projects/intelaris.png",
+      description: "Reimagines the classic number guessing game as a smart system with adaptive difficulty, AI-inspired hints, streak tracking, and minimal glassmorphism aesthetic.",
+      link: "https://intelaris.netlify.app"
+    },
+    {
+      id: "yt-predictor",
+      title: "YT Predictor",
+      category: "ML Analytics Dashboard",
+      technologies: "Python, Streamlit, Prophet, Scikit-Learn, YouTube API",
+      image: "/projects/yt-predictor.svg",
+      description: "Analyzes YouTube channel performance and predicts future subscriber growth using Machine Learning and Facebook Prophet with interactive Plotly visualizations.",
+      link: "https://github.com/sahil-exe-17"
     }
   ],
-  contact: {
+    contact: {
     email: "sahillale17@gmail.com",
     github: "https://github.com/sahil-exe-17",
     linkedin: "https://linkedin.com/in/sahil-lale",

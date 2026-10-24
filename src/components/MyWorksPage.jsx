@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { config } from '../config';
+import MonumentalFooter from './MonumentalFooter';
 
 export default function MyWorksPage() {
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function MyWorksPage() {
           );
         })}
       </div>
+      <MonumentalFooter />
     </div>
   );
 }

@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
-import { Sparkles, RefreshCw } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { DAILY_OUTFITS, getTodayOutfitIndex, applyOutfitToMaterials } from '../utils/dailyDrip';
+import { DAILY_OUTFITS, getTodayOutfitIndex } from '../utils/dailyDrip';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,11 +35,10 @@ export default function Character3D() {
   const containerRef = useRef(null);
   const hoverRef = useRef(null);
   const materialsRef = useRef(null);
-  const [outfitIndex, setOutfitIndex] = useState(() => {
+  const [outfitIndex] = useState(() => {
     const saved = localStorage.getItem('user_ootd_idx');
     return saved !== null ? parseInt(saved, 10) : getTodayOutfitIndex();
   });
-  const [isSwitching, setIsSwitching] = useState(false);
 
   useEffect(() => {
     if (window.innerWidth <= 768) return;
@@ -54,9 +52,9 @@ export default function Character3D() {
 
     const scene = new THREE.Scene();
 
-    // 4K Optimized Renderer
+    // Optimized Renderer
     const is4K = width > 2000 || height > 1200;
-    const maxPixelRatio = is4K ? 1.25 : Math.min(window.devicePixelRatio, 1.75);
+    const maxPixelRatio = is4K ? 1.0 : Math.min(window.devicePixelRatio, 1.4);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -370,7 +368,6 @@ export default function Character3D() {
           .fromTo(".character-model", { x: 0 }, { x: "-25%", duration: 1 }, 0)
           .to(".landing-container", { opacity: 0, duration: 0.4 }, 0)
           .to(".landing-container", { y: "40%", duration: 0.8 }, 0)
-          .to(".daily-drip-badge", { opacity: 0, y: 30, duration: 0.4 }, 0)
           .fromTo(".about-me", { y: "-50%" }, { y: "0%" }, 0);
 
         aboutTL
@@ -416,11 +413,12 @@ export default function Character3D() {
     };
     window.addEventListener("mousemove", onMouseMove, { passive: true });
 
-    // Smooth render loop (pause if tab hidden to eliminate lag)
+    // Smooth render loop (pause if tab hidden or scrolled past hero/about to save GPU & eliminate lag)
     let animId;
     const render = () => {
       animId = requestAnimationFrame(render);
       if (document.hidden) return;
+      if (window.scrollY > 2000) return;
 
       if (spineNode) {
         if (window.scrollY < 200) {
@@ -477,54 +475,11 @@ export default function Character3D() {
     };
   }, []);
 
-  const handleSwitchFit = (e) => {
-    e?.stopPropagation();
-    if (isSwitching) return;
-    setIsSwitching(true);
-    const nextIdx = (outfitIndex + 1) % DAILY_OUTFITS.length;
-    setOutfitIndex(nextIdx);
-    try {
-      localStorage.setItem('user_ootd_idx', nextIdx.toString());
-    } catch (err) {}
-    applyOutfitToMaterials(DAILY_OUTFITS[nextIdx], materialsRef.current, 0.7);
-    setTimeout(() => setIsSwitching(false), 700);
-  };
-
-  const currentOutfit = DAILY_OUTFITS[outfitIndex];
-
   return (
     <div className="character-container">
       <div className="character-model" ref={containerRef}>
         <div className="character-rim" />
         <div className="character-hover" ref={hoverRef} />
-      </div>
-
-      {/* Dynamic Daily Drip / Outfit of the Day Floating Controller */}
-      <div
-        className="daily-drip-badge"
-        onClick={handleSwitchFit}
-        title="Click to switch outfit! Changes automatically every single day."
-      >
-        <div className="drip-badge-pill">
-          <Sparkles size={13} className="text-[#c2a4ff]" />
-          <span>{currentOutfit.badge}</span>
-        </div>
-        <div className="drip-info">
-          <span className="drip-title">{currentOutfit.name}</span>
-          <span className="drip-tagline">{currentOutfit.tagline}</span>
-        </div>
-        <button
-          className="drip-btn"
-          type="button"
-          aria-label="Switch Outfit"
-          onClick={handleSwitchFit}
-        >
-          <RefreshCw
-            size={13}
-            className={`transition-transform duration-500 ${isSwitching ? 'rotate-180' : ''}`}
-          />
-          <span>Switch Fit</span>
-        </button>
       </div>
     </div>
   );
