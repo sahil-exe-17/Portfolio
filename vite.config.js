@@ -22,5 +22,26 @@ export default defineConfig({
     port: 5173,
     cors: true,
   },
+  build: {
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/three')) {
+            return 'three';
+          }
+          if (id.includes('node_modules/gsap')) {
+            return 'gsap';
+          }
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router')) {
+            return 'react-vendor';
+          }
+          if (id.includes('node_modules/lucide-react') || id.includes('node_modules/react-icons')) {
+            return 'icons';
+          }
+        },
+      },
+    },
+  },
 })
 

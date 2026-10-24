@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './Navbar';
 import SocialDock from './SocialDock';
-import Character3D from './Character3D';
 import Hero from './Hero';
 import AboutSection from './AboutSection';
 import WhatIDo from './WhatIDo';
@@ -14,6 +13,8 @@ import TechStackSection from './TechStackSection';
 import CtaSection from './CtaSection';
 import ContactSection from './ContactSection';
 import MonumentalFooter from './MonumentalFooter';
+
+const Character3D = lazy(() => import('./Character3D'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,8 +72,12 @@ export default function MainPortfolio({ lenisRef, isLoading }) {
       <Navbar lenisInstance={lenisRef?.current} />
       <SocialDock />
 
-      {/* 3D Interactive Animated Character (Desktop only, mounts cleanly upon load) */}
-      {isDesktop && !isLoading && <Character3D />}
+      {/* 3D Interactive Animated Character (Desktop only, lazy loaded upon load) */}
+      {isDesktop && !isLoading && (
+        <Suspense fallback={null}>
+          <Character3D />
+        </Suspense>
+      )}
 
       {/* Main Connected Editorial Flow */}
       <div className="editorial-sections">

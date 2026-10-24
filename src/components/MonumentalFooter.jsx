@@ -8,21 +8,29 @@ export default function MonumentalFooter() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const footerRef = useRef(null);
 
-  // Parallax tracking on desktop
+  // Parallax tracking on desktop - optimized with requestAnimationFrame
   useEffect(() => {
+    let rAF = null;
     const handleMouseMove = (e) => {
       if (!footerRef.current || window.innerWidth <= 768) return;
-      const rect = footerRef.current.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        // Normalize mouse x, y from -1 to 1 relative to footer
-        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-        setMousePos({ x, y });
-      }
+      if (rAF) return;
+      rAF = requestAnimationFrame(() => {
+        rAF = null;
+        if (!footerRef.current) return;
+        const rect = footerRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+          const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+          setMousePos({ x, y });
+        }
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      if (rAF) cancelAnimationFrame(rAF);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -98,9 +106,10 @@ export default function MonumentalFooter() {
           }}
         >
           <img
-            src="/images/footer_asteroid.png"
+            src="/images/footer_asteroid.webp"
             alt="Cosmic Asteroid Drift"
             loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -162,10 +171,11 @@ export default function MonumentalFooter() {
           data-cursor="ORBITAL"
         >
           <img
-            src="/images/footer_satellite.png"
+            src="/images/footer_satellite.webp"
             alt="Orbital Satellite Probe"
             className="satellite-img"
             loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -177,9 +187,10 @@ export default function MonumentalFooter() {
           }}
         >
           <img
-            src="/images/footer_asteroid.png"
+            src="/images/footer_asteroid.webp"
             alt="Deep Space Asteroid"
             loading="lazy"
+            decoding="async"
           />
         </div>
 

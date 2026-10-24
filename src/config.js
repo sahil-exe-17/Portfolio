@@ -106,7 +106,7 @@ projects: [
       title: "StackFlow AI",
       category: "AI Algorithmic Engine",
       technologies: "React 19, Groq AI, Data Structures, Tailwind CSS, Framer Motion",
-      image: "/projects/stackflow-ai.png",
+      image: "/projects/stackflow-ai.webp",
       description: "An interactive educational platform visualizing complex data structures with real-time Groq AI tutor explanations and dynamic execution tracking.",
       link: "https://stack-flow-ai.vercel.app/"
     },
@@ -115,7 +115,7 @@ projects: [
       title: "CryptoPulse AI",
       category: "Crypto Intelligence Platform",
       technologies: "Next.js, TypeScript, Tailwind CSS, Firebase, CoinGecko API",
-      image: "/projects/cryptopulse-ai.png",
+      image: "/projects/cryptopulse-ai.webp",
       description: "A sleek cryptocurrency platform providing live market tracking, simulated AI price forecasting, and multi-timeframe interactive charts.",
       link: "https://cryptopulse-ai64.vercel.app/"
     },
@@ -205,7 +205,7 @@ projects: [
       title: "Pune Traffic Jam Predictor",
       category: "Smart City Infrastructure",
       technologies: "React, Next.js, Google Maps API, Traffic APIs, Tailwind CSS",
-      image: "/projects/pune-traffic.png",
+      image: "/projects/pune-traffic.webp",
       description: "A real-time monitoring tool designed to help commuters navigate Pune's congestion by providing proactive alerts for specific city chokepoints and live travel times.",
       link: "https://pune-traffic-jam-predictor-363.created.app/"
     },
@@ -214,7 +214,7 @@ projects: [
       title: "ZentriX App",
       category: "Web Application",
       technologies: "React, Firebase, Tailwind CSS, Framer Motion",
-      image: "/projects/zentrix.png",
+      image: "/projects/zentrix.webp",
       description: "A responsive web application for ZentriX eSports that presents team information, player roster details, and dynamic tournament statistics.",
       link: "https://stately-babka-61d818.netlify.app/"
     },
@@ -223,7 +223,7 @@ projects: [
       title: "Intelaris",
       category: "Interactive Logic Game",
       technologies: "React, Tailwind CSS, Framer Motion, Web Audio API",
-      image: "/projects/intelaris.png",
+      image: "/projects/intelaris.webp",
       description: "Reimagines the classic number guessing game as a smart system with adaptive difficulty, AI-inspired hints, streak tracking, and minimal glassmorphism aesthetic.",
       link: "https://intelaris.netlify.app"
     },

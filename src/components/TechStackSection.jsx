@@ -1,16 +1,40 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { techStackPyramid } from '../config';
 
 export default function TechStackSection() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="techstack-new" id="techstack">
-      {/* Background looping ambient video */}
+      {/* Background looping ambient video (only plays when in view) */}
       <div className="techstack-video-container" aria-hidden="true">
         <video
-          autoPlay
+          ref={videoRef}
           loop
           muted
           playsInline
+          preload="none"
           className="techstack-video"
         >
           <source src="/video/video.webm" type="video/webm" />
